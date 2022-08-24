@@ -1,0 +1,17 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="hr.drigler.viva_wallet_pos">
+    <application>
+        <activity
+            android:name=".ResponseActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name=".ResponseActivity"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <!-- CALLBACK SCHEME -->
+                <data android:scheme="${applicationId}_cb" android:host="result"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
