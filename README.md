@@ -1,6 +1,6 @@
 # Viva Wallet POS Flutter
 
-This is flutter plugin for Viva Wallet POS App from https://www.vivawallet.com/
+This is a flutter plugin for Android integration with Viva Wallet POS.
 
 You can download POS app from:
 https://play.google.com/store/apps/details?id=com.vivawallet.spoc.payapp

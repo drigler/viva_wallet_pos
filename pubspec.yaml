@@ -1,5 +1,5 @@
 name: viva_wallet_pos
-description: Viva Wallet POS plugin.
+description: This is a flutter plugin for Android integration with Viva Wallet POS.
 version: 0.0.1
 homepage: https://github.com/drigler/viva_wallet_pos
 
