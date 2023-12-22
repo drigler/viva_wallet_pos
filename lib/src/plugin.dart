@@ -3,6 +3,7 @@
 // MIT-style license that can be found in the LICENSE file.
 
 import 'package:flutter/services.dart';
+
 import 'response.dart';
 import 'types.dart';
 import 'utils.dart';
@@ -22,7 +23,7 @@ class VivaWalletPos {
     if (_callbackScheme.isEmpty) {
       _callbackScheme = await _methodChannel.invokeMethod('getCallbackScheme', null);
     }
-
+  
     final response = await _methodChannel.invokeMethod(methodName, methodParams);
 
     if (response != null) {
@@ -124,6 +125,15 @@ class VivaWalletPos {
     bool showReceipt = true,
     bool showTransactionResult = true,
     bool showRating = true,
+    double? isvAmount,
+    String? isvClientId,
+    String? isvClientSecret,
+    String? isvMerchantId,
+    int? isvCurrencyCode,
+    String? isvSourceCode,
+    String? isvCustomerTrns,
+    int? isvMerchantSourceCode,
+    String? isvClientTransactionId,
   }) async {
     final Map<String, dynamic> params = <String, dynamic>{
       'merchantKey': merchantKey ?? 'deprecated',
@@ -133,6 +143,15 @@ class VivaWalletPos {
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
       'show_rating': showRating,
+      'ISV_amount': ParamUtils.doubleToAmount(isvAmount ?? 0.0),
+      'ISV_clientId': isvClientId,
+      'ISV_clientSecret': isvClientSecret,
+      'ISV_merchantId': isvMerchantId,
+      'ISV_currencyCode': isvCurrencyCode ?? 978,
+      'ISV_sourceCode': isvSourceCode ?? 'Default',
+      'ISV_customerTrns': isvCustomerTrns,
+      'ISV_merchantSourceCode': isvMerchantSourceCode,
+      'ISV_clientTransactionId': isvClientTransactionId,
     };
 
     final data = await _invokePosMethod('saleRequest', params);
