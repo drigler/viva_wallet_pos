@@ -23,7 +23,7 @@ class VivaWalletPos {
     if (_callbackScheme.isEmpty) {
       _callbackScheme = await _methodChannel.invokeMethod('getCallbackScheme', null);
     }
-  
+
     final response = await _methodChannel.invokeMethod(methodName, methodParams);
 
     if (response != null) {
@@ -129,8 +129,8 @@ class VivaWalletPos {
     String? isvClientId,
     String? isvClientSecret,
     String? isvMerchantId,
-    int? isvCurrencyCode,
-    String? isvSourceCode,
+    int isvCurrencyCode = 978,
+    String isvSourceCode = 'Default',
     String? isvCustomerTrns,
     int? isvMerchantSourceCode,
     String? isvClientTransactionId,
@@ -147,8 +147,8 @@ class VivaWalletPos {
       'ISV_clientId': isvClientId,
       'ISV_clientSecret': isvClientSecret,
       'ISV_merchantId': isvMerchantId,
-      'ISV_currencyCode': isvCurrencyCode ?? 978,
-      'ISV_sourceCode': isvSourceCode ?? 'Default',
+      'ISV_currencyCode': isvCurrencyCode,
+      'ISV_sourceCode': isvSourceCode,
       'ISV_customerTrns': isvCustomerTrns,
       'ISV_merchantSourceCode': isvMerchantSourceCode,
       'ISV_clientTransactionId': isvClientTransactionId,
