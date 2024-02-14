@@ -116,8 +116,8 @@ class VivaWalletPos {
     return SetPrintingSettingsResponse.create(_callbackScheme, data);
   }
 
-  // Make a sale
-  Future<TransactionResponse> sale({
+  // Make a sale with the ISV schema
+  Future<TransactionResponse> isvSale({
     String? merchantKey,
     required String clientTransactionId,
     required double amount,
@@ -126,9 +126,9 @@ class VivaWalletPos {
     bool showTransactionResult = true,
     bool showRating = true,
     double? isvAmount,
-    String? isvClientId,
-    String? isvClientSecret,
-    String? isvMerchantId,
+    required isvClientId,
+    required isvClientSecret,
+    required isvMerchantId,
     int isvCurrencyCode = 978,
     String isvSourceCode = 'Default',
     String? isvCustomerTrns,
@@ -152,6 +152,31 @@ class VivaWalletPos {
       'ISV_customerTrns': isvCustomerTrns,
       'ISV_merchantSourceCode': isvMerchantSourceCode,
       'ISV_clientTransactionId': isvClientTransactionId,
+    };
+
+    final data = await _invokePosMethod('saleRequest', params);
+
+    return TransactionResponse.create(_callbackScheme, data);
+  }
+
+  // Make a sale
+  Future<TransactionResponse> sale({
+    String? merchantKey,
+    required String clientTransactionId,
+    required double amount,
+    double? tipAmount,
+    bool showReceipt = true,
+    bool showTransactionResult = true,
+    bool showRating = true,
+  }) async {
+    final Map<String, dynamic> params = <String, dynamic>{
+      'merchantKey': merchantKey ?? 'deprecated',
+      'clientTransactionId': clientTransactionId,
+      'amount': ParamUtils.doubleToAmount(amount),
+      'tipAmount': tipAmount != null ? ParamUtils.doubleToAmount(tipAmount) : null,
+      'show_receipt': showReceipt,
+      'show_transaction_result': showTransactionResult,
+      'show_rating': showRating,
     };
 
     final data = await _invokePosMethod('saleRequest', params);
