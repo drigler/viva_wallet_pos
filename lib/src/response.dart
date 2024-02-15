@@ -2,9 +2,9 @@
 // All rights reserved. Use of this source code is governed by a
 // MIT-style license that can be found in the LICENSE file.
 
+import 'base_response.dart';
 import 'types.dart';
 import 'utils.dart';
-import 'base_response.dart';
 
 class ActivationResponse extends BaseResponse {
   ActivationResponse({
@@ -17,7 +17,6 @@ class ActivationResponse extends BaseResponse {
   }) : super(status: status, message: message, rawData: rawData);
 
   factory ActivationResponse.create(String cb, String data) {
-
     Uri uri = ParamUtils.parseUri(cb, data);
 
     return ActivationResponse(
@@ -25,7 +24,8 @@ class ActivationResponse extends BaseResponse {
       message: uri.queryParameters['message'] ?? '',
       rawData: data,
       virtualId: uri.queryParameters['virtualId'],
-      sourceTerminalId: uri.queryParameters['sourceTerminalId'] != null ? int.parse(uri.queryParameters['sourceTerminalId']!) : null,
+      sourceTerminalId:
+          uri.queryParameters['sourceTerminalId'] != null ? int.parse(uri.queryParameters['sourceTerminalId']!) : null,
       merchantID: uri.queryParameters['merchantID'],
     );
   }
@@ -39,7 +39,6 @@ class SetModeResponse extends BaseResponse {
   }) : super(status: status, message: message, rawData: rawData);
 
   factory SetModeResponse.create(String cb, String data) {
-
     Uri uri = ParamUtils.parseUri(cb, data);
 
     return SetModeResponse(
@@ -75,7 +74,6 @@ class SetPrintingSettingsResponse extends BaseResponse {
   }) : super(status: status, message: message, rawData: rawData);
 
   factory SetPrintingSettingsResponse.create(String cb, String data) {
-
     Uri uri = ParamUtils.parseUri(cb, data);
 
     return SetPrintingSettingsResponse(
@@ -102,7 +100,6 @@ class SendLogsResponse extends BaseResponse {
   }) : super(status: status, message: message, rawData: rawData);
 
   factory SendLogsResponse.create(String cb, String data) {
-
     Uri uri = ParamUtils.parseUri(cb, data);
 
     return SendLogsResponse(
@@ -130,6 +127,12 @@ class TransactionResponse extends BaseResponse {
   DateTime? transactionDate;
   String? transactionId;
 
+  double? isvAmount;
+  String? isvClientId;
+  String? isvClientSecret;
+  String? isvMerchantId;
+  int? currency;
+
   TransactionResponse({
     required status,
     required message,
@@ -149,10 +152,14 @@ class TransactionResponse extends BaseResponse {
     this.shortOrderCode,
     this.transactionDate,
     this.transactionId,
+    this.isvAmount,
+    this.isvClientId,
+    this.isvClientSecret,
+    this.isvMerchantId,
+    this.currency,
   }) : super(status: status, message: message, rawData: rawData);
 
   factory TransactionResponse.create(String cb, String data) {
-
     Uri uri = ParamUtils.parseUri(cb, data);
 
     return TransactionResponse(
@@ -174,6 +181,11 @@ class TransactionResponse extends BaseResponse {
       shortOrderCode: uri.queryParameters['shortOrderCode'],
       transactionDate: ParamUtils.paramToDateTime(uri.queryParameters['transactionDate']),
       transactionId: uri.queryParameters['transactionId'],
+      isvAmount: ParamUtils.paramToDouble(uri.queryParameters['ISV_amount']),
+      isvClientId: uri.queryParameters['ISV_clientId'],
+      isvClientSecret: uri.queryParameters['ISV_clientSecret'],
+      isvMerchantId: uri.queryParameters['ISV_merchantId'],
+      currency: int.tryParse(uri.queryParameters['currency'] ?? ''),
     );
   }
 }
@@ -186,7 +198,6 @@ class AbortResponse extends BaseResponse {
   }) : super(status: status, message: message, rawData: rawData);
 
   factory AbortResponse.create(String cb, String data) {
-
     Uri uri = ParamUtils.parseUri(cb, data);
 
     return AbortResponse(
