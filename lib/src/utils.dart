@@ -6,7 +6,6 @@ import 'dart:math';
 import 'types.dart';
 
 class ParamUtils {
-
   static Uri parseUri(String callback, String value) {
     if (value.isEmpty) {
       return Uri.parse('cb:?status=fail&message=Empty response received from Viva Wallet POS');
