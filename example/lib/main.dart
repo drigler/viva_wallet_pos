@@ -32,7 +32,8 @@ class _MyAppState extends State<MyApp> {
 
   void _activatePos() async {
     try {
-      ActivationResponse response = await _pos.activatePos(apikey: 'API KEY', apiSecret: 'API SECREET');
+      ActivationResponse response =
+          await _pos.activatePos(apikey: 'API KEY', apiSecret: 'API SECREET');
       _resultMessage(response.message);
     } catch (e) {
       _resultMessage(e.toString(), error: true);
@@ -156,7 +157,8 @@ class _MyAppState extends State<MyApp> {
             height: 70,
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: ElevatedButton(
-              child: const Text('Cancel - refund 10.00', style: TextStyle(fontSize: 18)),
+              child: const Text('Cancel - refund 10.00',
+                  style: TextStyle(fontSize: 18)),
               onPressed: () {
                 _cancel();
               },
@@ -166,7 +168,8 @@ class _MyAppState extends State<MyApp> {
             height: 70,
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: ElevatedButton(
-              child: const Text('Abort request', style: TextStyle(fontSize: 18)),
+              child:
+                  const Text('Abort request', style: TextStyle(fontSize: 18)),
               onPressed: () {
                 _abort();
               },
@@ -196,7 +199,8 @@ class _MyAppState extends State<MyApp> {
             height: 70,
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: ElevatedButton(
-              child: const Text('Set printing settings', style: TextStyle(fontSize: 18)),
+              child: const Text('Set printing settings',
+                  style: TextStyle(fontSize: 18)),
               onPressed: () {
                 _setPrintingSettings();
               },

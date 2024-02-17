@@ -2,8 +2,17 @@
 // All rights reserved. Use of this source code is governed by a
 // MIT-style license that can be found in the LICENSE file.
 
+/// Enum for application mode settings
+///
+/// (https://developer.vivawallet.com/apis-for-point-of-sale/card-terminal-apps/android-app/set-mode/)
 enum ApplicationMode { attended, semiUnattended, fullUnattended }
 
+///
+/// Merchant’s Business/Trade/Store name (depending on what option is selected in the 'viva.com | Terminal' application settings)
+///
 enum BusinessDescriptionType { businessName, tradeName, storeName }
 
+///
+/// The status of the transaction
+///
 enum TransactionStatus { fail, success, userCanceled }

@@ -4,6 +4,12 @@
 
 import 'types.dart';
 
+/// Base response class for all requests
+///
+/// Every request result have
+/// TransactionStatus - the status of transaction  (success, fail or user canceled)
+/// Message - for example Transaction successful, declined etc...
+/// rawData - raw transaction response data
 abstract class BaseResponse {
   TransactionStatus status = TransactionStatus.fail;
   String message;

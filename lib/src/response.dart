@@ -6,6 +6,7 @@ import 'base_response.dart';
 import 'types.dart';
 import 'utils.dart';
 
+/// Response from [activatePos] request
 class ActivationResponse extends BaseResponse {
   ActivationResponse({
     required status,
@@ -24,13 +25,15 @@ class ActivationResponse extends BaseResponse {
       message: uri.queryParameters['message'] ?? '',
       rawData: data,
       virtualId: uri.queryParameters['virtualId'],
-      sourceTerminalId:
-          uri.queryParameters['sourceTerminalId'] != null ? int.parse(uri.queryParameters['sourceTerminalId']!) : null,
+      sourceTerminalId: uri.queryParameters['sourceTerminalId'] != null
+          ? int.parse(uri.queryParameters['sourceTerminalId']!)
+          : null,
       merchantID: uri.queryParameters['merchantID'],
     );
   }
 }
 
+/// Response from [setMode] request
 class SetModeResponse extends BaseResponse {
   SetModeResponse({
     required status,
@@ -49,6 +52,7 @@ class SetModeResponse extends BaseResponse {
   }
 }
 
+/// Response from [setPrintingSettings] request
 class SetPrintingSettingsResponse extends BaseResponse {
   final BusinessDescriptionType businessDescriptionType;
   final bool printLogoOnMerchantReceipt;
@@ -80,18 +84,27 @@ class SetPrintingSettingsResponse extends BaseResponse {
       status: ParamUtils.statusFromString(uri.queryParameters['status']),
       message: uri.queryParameters['message'] ?? '',
       rawData: data,
-      businessDescriptionType: ParamUtils.stringToBdType(uri.queryParameters['businessDescriptionType']),
-      printLogoOnMerchantReceipt: ParamUtils.paramToBool(uri.queryParameters['printLogoOnMerchantReceipt']),
-      printVATOnMerchantReceipt: ParamUtils.paramToBool(uri.queryParameters['printVATOnMerchantReceipt']),
-      isBarcodeEnabled: ParamUtils.paramToBool(uri.queryParameters['isBarcodeEnabled']),
-      businessDescriptionEnabled: ParamUtils.paramToBool(uri.queryParameters['businessDescriptionEnabled']),
-      printAddressOnReceipt: ParamUtils.paramToBool(uri.queryParameters['printAddressOnReceipt']),
-      isMerchantReceiptEnabled: ParamUtils.paramToBool(uri.queryParameters['isMerchantReceiptEnabled']),
-      isCustomerReceiptEnabled: ParamUtils.paramToBool(uri.queryParameters['isCustomerReceiptEnabled']),
+      businessDescriptionType: ParamUtils.stringToBdType(
+          uri.queryParameters['businessDescriptionType']),
+      printLogoOnMerchantReceipt: ParamUtils.paramToBool(
+          uri.queryParameters['printLogoOnMerchantReceipt']),
+      printVATOnMerchantReceipt: ParamUtils.paramToBool(
+          uri.queryParameters['printVATOnMerchantReceipt']),
+      isBarcodeEnabled:
+          ParamUtils.paramToBool(uri.queryParameters['isBarcodeEnabled']),
+      businessDescriptionEnabled: ParamUtils.paramToBool(
+          uri.queryParameters['businessDescriptionEnabled']),
+      printAddressOnReceipt:
+          ParamUtils.paramToBool(uri.queryParameters['printAddressOnReceipt']),
+      isMerchantReceiptEnabled: ParamUtils.paramToBool(
+          uri.queryParameters['isMerchantReceiptEnabled']),
+      isCustomerReceiptEnabled: ParamUtils.paramToBool(
+          uri.queryParameters['isCustomerReceiptEnabled']),
     );
   }
 }
 
+/// Response from [sendLogs] request
 class SendLogsResponse extends BaseResponse {
   SendLogsResponse({
     required status,
@@ -110,6 +123,7 @@ class SendLogsResponse extends BaseResponse {
   }
 }
 
+/// Sale transaction response  from [sale], [isvSale] and [cancel] requests
 class TransactionResponse extends BaseResponse {
   String? clientTransactionId;
   double amount;
@@ -179,7 +193,8 @@ class TransactionResponse extends BaseResponse {
       aid: uri.queryParameters['aid'],
       orderCode: uri.queryParameters['orderCode'],
       shortOrderCode: uri.queryParameters['shortOrderCode'],
-      transactionDate: ParamUtils.paramToDateTime(uri.queryParameters['transactionDate']),
+      transactionDate:
+          ParamUtils.paramToDateTime(uri.queryParameters['transactionDate']),
       transactionId: uri.queryParameters['transactionId'],
       isvAmount: ParamUtils.paramToDouble(uri.queryParameters['ISV_amount']),
       isvClientId: uri.queryParameters['ISV_clientId'],
@@ -190,6 +205,7 @@ class TransactionResponse extends BaseResponse {
   }
 }
 
+/// Response from [abort] request
 class AbortResponse extends BaseResponse {
   AbortResponse({
     required status,

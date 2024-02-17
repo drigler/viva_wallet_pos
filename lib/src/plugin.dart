@@ -8,12 +8,18 @@ import 'response.dart';
 import 'types.dart';
 import 'utils.dart';
 
+///
+/// Flutter plugin for integration with Viva Wallet Pos
+///
+/// (https://developer.vivawallet.com/apis-for-point-of-sale/)
+///
 class VivaWalletPos {
-  final MethodChannel _methodChannel = const MethodChannel('viva_wallet_pos/methods');
+  final MethodChannel _methodChannel =
+      const MethodChannel('viva_wallet_pos/methods');
 
   String _callbackScheme = '';
 
-  // Singelton
+  // Singleton
   VivaWalletPos._();
   static final VivaWalletPos _instance = VivaWalletPos._();
   static VivaWalletPos get instance => _instance;
@@ -21,10 +27,12 @@ class VivaWalletPos {
   // Invoke pos methods
   Future<String> _invokePosMethod(String methodName, Map? methodParams) async {
     if (_callbackScheme.isEmpty) {
-      _callbackScheme = await _methodChannel.invokeMethod('getCallbackScheme', null);
+      _callbackScheme =
+          await _methodChannel.invokeMethod('getCallbackScheme', null);
     }
 
-    final response = await _methodChannel.invokeMethod(methodName, methodParams);
+    final response =
+        await _methodChannel.invokeMethod(methodName, methodParams);
 
     if (response != null) {
       return response;
@@ -33,7 +41,9 @@ class VivaWalletPos {
     return "";
   }
 
-  // Activate POS
+  /// Activate POS method
+  ///
+  /// (https://developer.vivawallet.com/apis-for-point-of-sale/card-terminal-apps/android-app/pos_activation/)
   Future<ActivationResponse> activatePos({
     required String apikey,
     required String apiSecret,
@@ -58,9 +68,11 @@ class VivaWalletPos {
     return ActivationResponse.create(_callbackScheme, data);
   }
 
-  // Set POS operation mode
-  // carefull!!!
-  // except for ApplicationMode.attendend better do not use other modes with this plugin
+  /// Set POS operation mode
+  ///
+  /// except for ApplicationMode.attended better do not use other modes with this plugin
+  ///
+  /// (https://developer.vivawallet.com/apis-for-point-of-sale/card-terminal-apps/android-app/set-mode/)
   Future<SetModeResponse> setMode({
     required ApplicationMode mode,
     required String pin,
@@ -83,14 +95,18 @@ class VivaWalletPos {
     return SetModeResponse.create(_callbackScheme, data);
   }
 
-  // Send logs to viva devs
+  /// Send logs to viva devs
+  ///
+  /// (https://developer.vivawallet.com/apis-for-point-of-sale/card-terminal-apps/android-app/sendlogs/)
   Future<SendLogsResponse> sendLogs() async {
     final data = await _invokePosMethod('sendLogsRequest', null);
 
     return SendLogsResponse.create(_callbackScheme, data);
   }
 
-  // Set printing settings
+  /// Set printing settings
+  ///
+  /// (https://developer.vivawallet.com/apis-for-point-of-sale/card-terminal-apps/android-app/printing/)
   Future<SetPrintingSettingsResponse> setPrintingSettings(
       {bool? businessDescriptionEnabled,
       BusinessDescriptionType? businessDescriptionType,
@@ -102,7 +118,8 @@ class VivaWalletPos {
       bool? isCustomerReceiptEnabled}) async {
     final Map<String, dynamic> params = <String, dynamic>{
       'businessDescriptionEnabled': businessDescriptionEnabled,
-      'businessDescriptionType': ParamUtils.bdTypeToString(businessDescriptionType),
+      'businessDescriptionType':
+          ParamUtils.bdTypeToString(businessDescriptionType),
       'printLogoOnMerchantReceipt': printLogoOnMerchantReceipt,
       'printVATOnMerchantReceipt': printVATOnMerchantReceipt,
       'isBarcodeEnabled': isBarcodeEnabled,
@@ -116,7 +133,10 @@ class VivaWalletPos {
     return SetPrintingSettingsResponse.create(_callbackScheme, data);
   }
 
-  // Make a sale with the ISV schema
+  /// Make a sale with the ISV schema
+  ///
+  /// same as sale request but with ISV partner program params
+  /// (https://developer.vivawallet.com/isv-partner-program/)
   Future<TransactionResponse> isvSale({
     String? merchantKey,
     required String clientTransactionId,
@@ -139,7 +159,8 @@ class VivaWalletPos {
       'merchantKey': merchantKey ?? 'deprecated',
       'clientTransactionId': clientTransactionId,
       'amount': ParamUtils.doubleToAmount(amount),
-      'tipAmount': tipAmount != null ? ParamUtils.doubleToAmount(tipAmount) : null,
+      'tipAmount':
+          tipAmount != null ? ParamUtils.doubleToAmount(tipAmount) : null,
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
       'show_rating': showRating,
@@ -159,7 +180,9 @@ class VivaWalletPos {
     return TransactionResponse.create(_callbackScheme, data);
   }
 
-  // Make a sale
+  /// Make a sale
+  ///
+  /// (https://developer.vivawallet.com/apis-for-point-of-sale/card-terminal-apps/android-app/sale/)
   Future<TransactionResponse> sale({
     String? merchantKey,
     required String clientTransactionId,
@@ -173,7 +196,8 @@ class VivaWalletPos {
       'merchantKey': merchantKey ?? 'deprecated',
       'clientTransactionId': clientTransactionId,
       'amount': ParamUtils.doubleToAmount(amount),
-      'tipAmount': tipAmount != null ? ParamUtils.doubleToAmount(tipAmount) : null,
+      'tipAmount':
+          tipAmount != null ? ParamUtils.doubleToAmount(tipAmount) : null,
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
       'show_rating': showRating,
@@ -184,7 +208,9 @@ class VivaWalletPos {
     return TransactionResponse.create(_callbackScheme, data);
   }
 
-  // Cancel transaction -> refund
+  /// Cancel transaction -> refund request
+  ///
+  /// (https://developer.vivawallet.com/apis-for-point-of-sale/card-terminal-apps/android-app/cancel/)
   Future<TransactionResponse> cancel({
     String? merchantKey,
     String? referenceNumber,
@@ -203,7 +229,8 @@ class VivaWalletPos {
       'amount': ParamUtils.doubleToAmount(amount),
       'orderCode': orderCode,
       'shortOrderCode': shortOrderCode,
-      'txnDateFrom': txnDateFrom != null ? '${txnDateFrom.toIso8601String()}Z' : null,
+      'txnDateFrom':
+          txnDateFrom != null ? '${txnDateFrom.toIso8601String()}Z' : null,
       'txnDateTo': txnDateTo != null ? '${txnDateTo.toIso8601String()}Z' : null,
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
@@ -212,7 +239,7 @@ class VivaWalletPos {
 
     String data = await _invokePosMethod('cancelRequest', params);
 
-    // When using pin if user presses back button and cancel's to enter pin
+    // When using pin if user presses back button and cancels to enter pin
     // POS response is just empty so change it to cancel
     if (data.isEmpty) {
       data = 'cb:?status=userCanceled&message=User canceled';
@@ -221,7 +248,9 @@ class VivaWalletPos {
     return TransactionResponse.create(_callbackScheme, data);
   }
 
-  // Abort ongoing transaction
+  /// Abort ongoing transaction
+  ///
+  /// (https://developer.vivawallet.com/apis-for-point-of-sale/card-terminal-apps/android-app/abort/)
   Future<AbortResponse> abort({String? merchantKey}) async {
     final Map<String, dynamic> params = <String, dynamic>{
       'merchantKey': merchantKey ?? 'deprecated',
