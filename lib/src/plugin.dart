@@ -148,7 +148,7 @@ class VivaWalletPos {
     double? isvAmount,
     required String isvClientId,
     required String isvClientSecret,
-    required String isvMerchantId,
+    String? isvMerchantId,
     int isvCurrencyCode = 978,
     String isvSourceCode = 'Default',
     String? isvCustomerTrns,
