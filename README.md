@@ -18,7 +18,7 @@ Add this to your package's pubspec.yaml file:
 
 ```` dart
 dependencies:
-  viva_wallet_pos: ^0.0.5
+  viva_wallet_pos: ^0.0.6
 ````
 
 2. Install it

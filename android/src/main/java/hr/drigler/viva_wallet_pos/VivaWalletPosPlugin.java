@@ -5,7 +5,7 @@
 package hr.drigler.viva_wallet_pos;
 
 import android.app.Activity;
-
+//import android.util.Log;
 import android.net.Uri;
 import android.content.Context;
 import android.content.Intent;
@@ -116,12 +116,15 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
   // Set result from ResponseActivity
   public static void setActivityResult(String data) {
     activityResult = data;
-    activityFinished = true;
   }
 
   // Set error from ResponseActivity
   public static void setActivityError(String error) {
     activityResult = callbackScheme + "?status=fail&message=" + error;
+  }
+
+  // Set the flag that Terminal activiti is finished
+  public static void setActivityFinished() {
     activityFinished = true;
   }
 
@@ -250,15 +253,13 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
     Intent posIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(request));
     if(posIntent != null) {
        posIntent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-       posIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-       posIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+       // Without this flag it runs under our task and that is what we want
+       // posIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
        try {
          activity.startActivity(posIntent);
 
          // Now we wait for activity to send us result
          // trouble if VivaTerminal doesn't finish or if doesn't send any result
-         // and it will happen if the user tries to switch the app
-         // need to see how to deal with that
          AsyncTask.execute(new Runnable() {
            @Override
            public void run() {

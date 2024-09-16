@@ -1,3 +1,6 @@
+## 0.0.6 - 2024-09-16
+- Some tweaks in the code to make plugin more reliable
+ 
 ## 0.0.5 - 2024-09-16
 - Because of a new way how VivaTerminal works, it is not possible anymore to start it with startActivityForResult
   so now it is using only startActivity and then it waits for a message from VivaTerminal in runable Task.

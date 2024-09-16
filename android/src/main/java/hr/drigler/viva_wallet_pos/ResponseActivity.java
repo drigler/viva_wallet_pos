@@ -12,13 +12,8 @@ import android.os.Bundle;
 public class ResponseActivity extends Activity {
 
     @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(null);
         try {
             final Uri uri = getIntent().getData();
             if (uri == null) {
@@ -30,8 +25,13 @@ public class ResponseActivity extends Activity {
         } catch (Exception e) {
             VivaWalletPosPlugin.setActivityError(e.toString());
         }
-
         finish();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        VivaWalletPosPlugin.setActivityFinished();
     }
 
 }
