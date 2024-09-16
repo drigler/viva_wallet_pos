@@ -1,3 +1,8 @@
+## 0.0.5 - 2024-09-16
+- Because of a new way how VivaTerminal works, it is not possible anymore to start it with startActivityForResult
+  so now it is using only startActivity and then it waits for a message from VivaTerminal in runable Task.
+  It's ugly but it works for now (except it can go in a infinite loop in some conditions, need to resolve that in next version)
+
 ## 0.0.4 - 2024-02-17
 
 - Updated dartoc documentation comments

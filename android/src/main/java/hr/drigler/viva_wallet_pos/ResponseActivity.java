@@ -9,7 +9,6 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 
-
 public class ResponseActivity extends Activity {
 
     @Override
