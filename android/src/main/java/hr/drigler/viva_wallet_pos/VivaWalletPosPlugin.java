@@ -5,15 +5,11 @@
 package hr.drigler.viva_wallet_pos;
 
 import android.app.Activity;
-//import android.util.Log;
 import android.net.Uri;
 import android.content.Context;
 import android.content.Intent;
 
-import android.os.AsyncTask;
-
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
@@ -24,9 +20,6 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 
-import io.flutter.plugin.common.PluginRegistry;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
-
 public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
 
   private static final String METHOD_CHANNEL = "viva_wallet_pos/methods";
@@ -36,12 +29,11 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
 
   private Context context;
   private Activity activity;
-  private Result result;
+  private static Result result;
   private String appId;
 
   private static String callbackScheme;
   private static String activityResult;
-  private static boolean activityFinished;
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -60,13 +52,12 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
 
   @Override
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
-    this.result = result;
-    this.activityFinished = false;
-    this.activityResult = "";
+    VivaWalletPosPlugin.result = result;
+    activityResult = "";
 
     switch (call.method) {
       case "getCallbackScheme":
-        this.result.success(callbackScheme);
+        result.success(callbackScheme);
         break;
       case "activatePos":
         activatePos(call);
@@ -111,7 +102,7 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
         abortRequest(call);
         break;
       default:
-        this.result.notImplemented();
+        result.notImplemented();
         break;
     }
   }
@@ -144,9 +135,9 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
     activityResult = callbackScheme + "?status=fail&message=" + error;
   }
 
-  // Set the flag that Terminal activiti is finished
-  public static void setActivityFinished() {
-    activityFinished = true;
+  // Send result to Flutter
+  public static void sendActivityResult() {
+    result.success(activityResult);
   }
 
   private String addArgument(MethodCall call, String argName) {
@@ -351,39 +342,14 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
 
   private void sendRequest(String request) {
     Intent posIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(request));
-    if(posIntent != null) {
-       posIntent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-       // Without this flag it runs under our task and that is what we want
-       // posIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-       try {
-         activity.startActivity(posIntent);
-
-         // Now we wait for activity to send us result
-         // trouble if VivaTerminal doesn't finish or if doesn't send any result
-         AsyncTask.execute(new Runnable() {
-           @Override
-           public void run() {
-             while(true) {
-               try {
-                 Thread.sleep(1000);
-               } catch (InterruptedException e) {
-                 e.printStackTrace();
-               }
-
-               if (activityFinished) {
-                 result.success(activityResult);
-                 break;
-               }
-             }
-           }
-         });
-
-       } catch (Exception e) {
-        this.result.error("Error starting Viva Wallet POS", e.toString(), null);
-      }
-    } else {
-      this.result.error("Error starting Viva Wallet POS", "Error creating intent", null);
-    }
+      posIntent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+      // Without this flag it runs under our task and that is what we want
+      // posIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      try {
+        activity.startActivity(posIntent);
+      } catch (Exception e) {
+       result.error("Error starting Viva Wallet POS", e.toString(), null);
+     }
   }
 
 }

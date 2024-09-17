@@ -4,7 +4,6 @@
 
 package hr.drigler.viva_wallet_pos;
 
-import android.content.Intent;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,7 +30,6 @@ public class ResponseActivity extends Activity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        VivaWalletPosPlugin.setActivityFinished();
+        VivaWalletPosPlugin.sendActivityResult();
     }
-
 }
