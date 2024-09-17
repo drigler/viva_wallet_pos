@@ -101,6 +101,6 @@ try {
 - [x]  abort
 
 ## Unsupported methods - work in progress
-- []  preauth request
-- []  capture pre-auth request
-- []  rebate request
+- [ ]  preauth request
+- [ ]  capture pre-auth request
+- [ ]  rebate request
