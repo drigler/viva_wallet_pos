@@ -33,6 +33,31 @@ class ActivationResponse extends BaseResponse {
   }
 }
 
+/// Response from [getActivationCode] request
+class GetActivationCodeResponse extends BaseResponse {
+  GetActivationCodeResponse({
+    required status,
+    required message,
+    required rawData,
+    String? virtualId,
+    String? activationCode,
+    String? merchantID,
+  }) : super(status: status, message: message, rawData: rawData);
+
+  factory GetActivationCodeResponse.create(String cb, String data) {
+    Uri uri = ParamUtils.parseUri(cb, data);
+
+    return GetActivationCodeResponse(
+      status: ParamUtils.statusFromString(uri.queryParameters['status']),
+      message: uri.queryParameters['message'] ?? '',
+      rawData: data,
+      virtualId: uri.queryParameters['virtualId'],
+      activationCode: uri.queryParameters['activationCode'],
+      merchantID: uri.queryParameters['merchantID'],
+    );
+  }
+}
+
 /// Response from [setMode] request
 class SetModeResponse extends BaseResponse {
   SetModeResponse({
@@ -104,6 +129,88 @@ class SetPrintingSettingsResponse extends BaseResponse {
   }
 }
 
+/// Response from [setDecimalAmountModeRequest] request
+class SetDecimalAmountModeResponse extends BaseResponse {
+  SetDecimalAmountModeResponse({
+    required status,
+    required message,
+    required rawData,
+  }) : super(status: status, message: message, rawData: rawData);
+
+  factory SetDecimalAmountModeResponse.create(String cb, String data) {
+    Uri uri = ParamUtils.parseUri(cb, data);
+
+    return SetDecimalAmountModeResponse(
+      status: ParamUtils.statusFromString(uri.queryParameters['status']),
+      message: uri.queryParameters['message'] ?? '',
+      rawData: data,
+    );
+  }
+}
+
+/// Response from [resetTerminalRequest] request
+class ResetTerminalResponse extends BaseResponse {
+  ResetTerminalResponse({
+    required status,
+    required message,
+    required rawData,
+  }) : super(status: status, message: message, rawData: rawData);
+
+  factory ResetTerminalResponse.create(String cb, String data) {
+    Uri uri = ParamUtils.parseUri(cb, data);
+
+    return ResetTerminalResponse(
+      status: ParamUtils.statusFromString(uri.queryParameters['status']),
+      message: uri.queryParameters['message'] ?? '',
+      rawData: data,
+    );
+  }
+}
+
+/// Response from [reprintTransaction] request
+class ReprintTransactionResponse extends BaseResponse {
+  ReprintTransactionResponse({
+    required status,
+    required message,
+    required rawData,
+  }) : super(status: status, message: message, rawData: rawData);
+
+  factory ReprintTransactionResponse.create(String cb, String data) {
+    Uri uri = ParamUtils.parseUri(cb, data);
+
+    return ReprintTransactionResponse(
+      status: ParamUtils.statusFromString(uri.queryParameters['status']),
+      message: uri.queryParameters['message'] ?? '',
+      rawData: data,
+    );
+  }
+}
+
+/// Response from [batchRequest] request
+class BatchResponse extends BaseResponse {
+  final String batchId;
+  final String batchName;
+
+  BatchResponse({
+    required status,
+    required message,
+    required rawData,
+    required this.batchId,
+    required this.batchName,
+  }) : super(status: status, message: message, rawData: rawData);
+
+  factory BatchResponse.create(String cb, String data) {
+    Uri uri = ParamUtils.parseUri(cb, data);
+
+    return BatchResponse(
+        status: ParamUtils.statusFromString(uri.queryParameters['status']),
+        message: uri.queryParameters['message'] ?? '',
+        rawData: data,
+        batchId: uri.queryParameters['batchId'] ?? '',
+        batchName: uri.queryParameters['batchName'] ?? '');
+  }
+}
+
 /// Response from [sendLogs] request
 class SendLogsResponse extends BaseResponse {
   SendLogsResponse({
@@ -123,14 +230,14 @@ class SendLogsResponse extends BaseResponse {
   }
 }
 
-/// Sale transaction response  from [sale], [isvSale] and [cancel] requests
+/// Sale transaction response  from [sale], [isvSale], [transactionDetails] and [cancel] requests
 class TransactionResponse extends BaseResponse {
   String? clientTransactionId;
   double amount;
   double tipAmount;
   String? verificationMethod;
   String? rrn;
-  String? cartType;
+  String? cardType;
   String? referenceNumber;
   String? accountNumber;
   String? authorisationCode;
@@ -146,7 +253,6 @@ class TransactionResponse extends BaseResponse {
   String? isvClientSecret;
   String? isvMerchantId;
   int? currency;
-
   TransactionResponse({
     required status,
     required message,
@@ -156,7 +262,7 @@ class TransactionResponse extends BaseResponse {
     required this.tipAmount,
     this.verificationMethod,
     this.rrn,
-    this.cartType,
+    this.cardType,
     this.referenceNumber,
     this.accountNumber,
     this.authorisationCode,
@@ -185,7 +291,7 @@ class TransactionResponse extends BaseResponse {
       tipAmount: ParamUtils.paramToDouble(uri.queryParameters['tipAmount']),
       verificationMethod: uri.queryParameters['verificationMethod'],
       rrn: uri.queryParameters['rrn'],
-      cartType: uri.queryParameters['cardType'],
+      cardType: uri.queryParameters['cardType'],
       referenceNumber: uri.queryParameters['referenceNumber'],
       accountNumber: uri.queryParameters['accountNumber'],
       authorisationCode: uri.queryParameters['authorisationCode'],
@@ -201,6 +307,47 @@ class TransactionResponse extends BaseResponse {
       isvClientSecret: uri.queryParameters['ISV_clientSecret'],
       isvMerchantId: uri.queryParameters['ISV_merchantId'],
       currency: int.tryParse(uri.queryParameters['currency'] ?? ''),
+    );
+  }
+}
+
+/// Fast Refund response  from [fastRefund] request
+class FastRefundResponse extends BaseResponse {
+  double amount;
+  String? sourceCode;
+  String? cardType;
+  String? accountNumber;
+  String? tid;
+  String? transactionId;
+  String? aadeTransactionId;
+
+  FastRefundResponse({
+    required status,
+    required message,
+    required rawData,
+    required this.amount,
+    this.sourceCode,
+    this.cardType,
+    this.accountNumber,
+    this.tid,
+    this.transactionId,
+    this.aadeTransactionId,
+  }) : super(status: status, message: message, rawData: rawData);
+
+  factory FastRefundResponse.create(String cb, String data) {
+    Uri uri = ParamUtils.parseUri(cb, data);
+
+    return FastRefundResponse(
+      status: ParamUtils.statusFromString(uri.queryParameters['status']),
+      message: uri.queryParameters['message'] ?? '',
+      rawData: data,
+      amount: ParamUtils.paramToDouble(uri.queryParameters['amount']),
+      sourceCode: uri.queryParameters['sourceCode'],
+      cardType: uri.queryParameters['cardType'],
+      accountNumber: uri.queryParameters['accountNumber'],
+      tid: uri.queryParameters['tid'],
+      transactionId: uri.queryParameters['transactionId'],
+      aadeTransactionId: uri.queryParameters['aadeTransactionId'],
     );
   }
 }

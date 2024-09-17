@@ -18,7 +18,7 @@ Add this to your package's pubspec.yaml file:
 
 ```` dart
 dependencies:
-  viva_wallet_pos: ^0.0.6
+  viva_wallet_pos: ^0.0.7
 ````
 
 2. Install it
@@ -85,10 +85,22 @@ try {
 
 ## Supported methods
 - [x]  activatePos
+- [x]  getActivationCode
 - [x]  setMode
+- [x]  setDecimalAmountMode
+- [x]  resetTerminal
+- [x]  batch
+- [x]  transactionDetails
+- [x]  fastRefund
 - [x]  setPrintingSettings
+- [x]  reprintTransaction
 - [x]  sendLogs
 - [x]  sale
 - [x]  isvSale (new thanks to jousis9 see https://github.com/drigler/viva_wallet_pos/pull/1)
 - [x]  cancel
 - [x]  abort
+
+## Unsupported methods - work in progress
+- []  preauth request
+- []  capture pre-auth request
+- []  rebate request

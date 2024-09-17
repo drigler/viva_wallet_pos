@@ -68,6 +68,15 @@ class VivaWalletPos {
     return ActivationResponse.create(_callbackScheme, data);
   }
 
+  /// Get Activation Code request
+  ///
+  /// (https://developer.viva.com/apis-for-point-of-sale/card-terminal-apps/android-app/get_activation_code/)
+  Future<GetActivationCodeResponse> getActivationCode() async {
+    final data = await _invokePosMethod('getActivationCode', null);
+
+    return GetActivationCodeResponse.create(_callbackScheme, data);
+  }
+
   /// Set POS operation mode
   ///
   /// except for ApplicationMode.attended better do not use other modes with this plugin
@@ -131,6 +140,85 @@ class VivaWalletPos {
     final data = await _invokePosMethod('setPrintingSettingsRequest', params);
 
     return SetPrintingSettingsResponse.create(_callbackScheme, data);
+  }
+
+  /// Set decimal amount mode (works only on Card Terminal Apps)
+  ///
+  /// (https://developer.viva.com/apis-for-point-of-sale/card-terminal-apps/android-app/decimal-amount-mode/)
+  Future<SetDecimalAmountModeResponse> setDecimalAmountMode({
+    required bool decimalMode,
+  }) async {
+    final Map<String, dynamic> params = <String, dynamic>{
+      'decimalMode': decimalMode == true ? '1' : '0',
+    };
+    final data = await _invokePosMethod('setDecimalAmountModeRequest', params);
+
+    return SetDecimalAmountModeResponse.create(_callbackScheme, data);
+  }
+
+  /// Reset Terminal (soft or full reset)
+  ///
+  /// (https://developer.viva.com/apis-for-point-of-sale/card-terminal-apps/android-app/reset/)
+  Future<ResetTerminalResponse> resetTerminal({
+    bool softReset = true,
+  }) async {
+    final Map<String, dynamic> params = <String, dynamic>{
+      'softReset': softReset,
+    };
+    final data = await _invokePosMethod('resetTerminalRequest', params);
+
+    return ResetTerminalResponse.create(_callbackScheme, data);
+  }
+
+  /// Reprint previously completed transaction
+  ///
+  /// (https://developer.viva.com/apis-for-point-of-sale/card-terminal-apps/android-app/reprint-transaction/)
+  Future<ReprintTransactionResponse> reprintTransaction(
+      {required String orderCode}) async {
+    final Map<String, dynamic> params = <String, dynamic>{
+      'orderCode': orderCode,
+    };
+
+    final data = await _invokePosMethod('reprintTransactionRequest', params);
+
+    return ReprintTransactionResponse.create(_callbackScheme, data);
+  }
+
+  /// Batch Request
+  ///
+  /// (https://developer.viva.com/apis-for-point-of-sale/card-terminal-apps/android-app/batch/)
+  Future<BatchResponse> batch({
+    required BatchCommand command,
+    String? batchId,
+    String? batchName,
+  }) async {
+    final Map<String, dynamic> params = <String, dynamic>{
+      'command': command == BatchCommand.open ? 'open' : 'close',
+      'batchId': batchId,
+      'batchName': batchName,
+    };
+
+    final data = await _invokePosMethod('batchRequest', params);
+
+    return BatchResponse.create(_callbackScheme, data);
+  }
+
+  /// Transaction Details Request
+  ///
+  /// (https://developer.viva.com/apis-for-point-of-sale/card-terminal-apps/android-app/transaction-details/)
+  Future<TransactionResponse> transactionDetails({
+    String? merchantKey,
+    required String clientTransactiodId,
+    required String sourceTerminalId,
+  }) async {
+    final Map<String, dynamic> params = <String, dynamic>{
+      'merchantKey': merchantKey ?? 'deprecated',
+      'clientTransactionId': clientTransactiodId,
+      'sourceTerminalId': sourceTerminalId,
+    };
+    final data = await _invokePosMethod('transactionDetailsRequest', params);
+
+    return TransactionResponse.create(_callbackScheme, data);
   }
 
   /// Make a sale with the ISV schema
@@ -246,6 +334,31 @@ class VivaWalletPos {
     }
 
     return TransactionResponse.create(_callbackScheme, data);
+  }
+
+  /// Fast Refund request
+  ///
+  /// (https://developer.viva.com/apis-for-point-of-sale/card-terminal-apps/android-app/fast_refund/)
+  Future<FastRefundResponse> fastRefund({
+    String? referenceNumber,
+    required double amount,
+    String? sourceCode,
+    bool showReceipt = true,
+    bool showTransactionResult = true,
+    bool showRating = true,
+  }) async {
+    final Map<String, dynamic> params = <String, dynamic>{
+      'referenceNumber': referenceNumber,
+      'amount': ParamUtils.doubleToAmount(amount),
+      'sourceCode': sourceCode,
+      'show_receipt': showReceipt,
+      'show_transaction_result': showTransactionResult,
+      'show_rating': showRating,
+    };
+
+    String data = await _invokePosMethod('fastRefundRequest', params);
+
+    return FastRefundResponse.create(_callbackScheme, data);
   }
 
   /// Abort ongoing transaction

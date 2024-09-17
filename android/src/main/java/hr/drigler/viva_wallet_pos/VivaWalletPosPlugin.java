@@ -71,11 +71,26 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
       case "activatePos":
         activatePos(call);
         break;
+      case "getActivationCode":
+        getActivationCode();
+        break;
       case "setModeRequest":
         setModeRequest(call);
         break;
       case "setPrintingSettingsRequest":
         setPrintingSettingsRequest(call);
+        break;
+      case "setDecimalAmountModeRequest":
+        setDecimalAmountModeRequest(call);
+        break;
+      case "resetTerminalRequest":
+        resetTerminalRequest(call);
+        break;
+      case "reprintTransactionRequest":
+        reprintTransactionRequest(call);
+        break;
+      case "batchRequest":
+        batchRequest(call);
         break;
       case "sendLogsRequest":
         sendLogsRequest();
@@ -83,8 +98,14 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
       case "saleRequest":
         saleRequest(call);
         break;
+      case "transactionDetailsRequest":
+        transactionDetailsRequest(call);
+        break;
       case "cancelRequest":
         cancelRequest(call);
+        break;
+      case "fastRefundRequest":
+        fastRefundRequest(call);
         break;
       case "abortRequest":
         abortRequest(call);
@@ -136,7 +157,6 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
   }
 
   private void activatePos(MethodCall call) {
-
     final String request = VWP_CLIENT
             + "?action=activatePos"
             + "&appId=" + appId
@@ -147,6 +167,15 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
             + addArgument(call, "skipExternalDeviceSetup")
             + addArgument(call, "activateMoto")
             + addArgument(call, "activateQRCodes")
+            + "&callback=" + callbackScheme;
+
+    sendRequest(request);
+  }
+
+  private void getActivationCode() {
+    final String request = VWP_CLIENT
+            + "?action=getActivationCode"
+            + "&appId=" + appId
             + "&callback=" + callbackScheme;
 
     sendRequest(request);
@@ -180,8 +209,51 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
     sendRequest(request);
   }
 
+  private void setDecimalAmountModeRequest(MethodCall call) {
+    final String request = VWP_CLIENT
+            + "?action=amountDecimalMode"
+            + "&appId=" + appId
+            + addArgument(call, "decimalMode")
+            + "&callback=" + callbackScheme;
 
-  private void sendLogsRequest () {
+    sendRequest(request);
+  }
+
+  private void resetTerminalRequest(MethodCall call) {
+    final String request = VWP_CLIENT
+            + "?action=reset"
+            + "&appId=" + appId
+            + addArgument(call, "softReset")
+            + "&callback=" + callbackScheme;
+
+    sendRequest(request);
+  }
+
+  private void reprintTransactionRequest(MethodCall call) {
+    final String request = VWP_CLIENT
+            + "?action=print"
+            + "&appId=" + appId
+            + "&command=reprint"
+            + addArgument(call, "orderCode")
+            + "&callback=" + callbackScheme;
+
+    sendRequest(request);
+  }
+
+  private void batchRequest(MethodCall call) {
+    final String request = VWP_CLIENT
+            + "?action=batch"
+            + "&appId=" + appId
+            + addArgument(call, "command")
+            + addArgument(call, "batchId")
+            + addArgument(call, "batchName")
+            + "&callback=" + callbackScheme;
+
+    sendRequest(request);
+  }
+
+
+  private void sendLogsRequest() {
     final String request = VWP_CLIENT
             + "?action=sendLogs"
             + "&appId=" + appId
@@ -217,8 +289,19 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
     sendRequest(request);
   }
 
-  private void cancelRequest(MethodCall call) {
+  private void transactionDetailsRequest(MethodCall call) {
+    final String request = VWP_CLIENT
+            + "?action=transactionDetails"
+            + "&appId=" + appId
+            + addArgument(call, "merchantKey")
+            + addArgument(call, "clientTransactionId")
+            + addArgument(call, "sourceTerminalId")
+            + "&callback=" + callbackScheme;
 
+    sendRequest(request);
+  }
+
+  private void cancelRequest(MethodCall call) {
     final String request = VWP_CLIENT
             + "?action=cancel"
             + "&appId=" + appId
@@ -229,6 +312,23 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
             + addArgument(call, "shortOrderCode")
             + addArgument(call, "txnDateFrom")
             + addArgument(call, "txnDateTo")
+            + addArgument(call, "show_receipt")
+            + addArgument(call, "show_transaction_result")
+            + addArgument(call, "show_rating")
+            + "&protocol=int_default"
+            + "&callback=" + callbackScheme;
+
+    sendRequest(request);
+  }
+
+  private void fastRefundRequest(MethodCall call) {
+
+    final String request = VWP_CLIENT
+            + "?action=send_money_fast_refund"
+            + "&appId=" + appId
+            + addArgument(call, "referenceNumber")
+            + addArgument(call, "amount")
+            + addArgument(call, "sourceCode")
             + addArgument(call, "show_receipt")
             + addArgument(call, "show_transaction_result")
             + addArgument(call, "show_rating")

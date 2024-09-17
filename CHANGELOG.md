@@ -1,3 +1,7 @@
+## 0.0.7 - 2024-09-17
+- Added support for more Terminal API calls
+  (getActivationCode, reprintTransaction, setDecimalAmountMode, resetTerminal, batch, transactionDetails, fastRefund)
+
 ## 0.0.6 - 2024-09-16
 - Some tweaks in the code to make plugin more reliable
  
