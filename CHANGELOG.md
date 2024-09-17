@@ -1,3 +1,7 @@
+## 0.0.8 - 2024-09-17
+  - Changed the way plugin handles the result from Viva Terminal. Thanks to [@imGok](https://github.com/imGok) for the elegant solution.
+  - All plugin users are required to update to this version, because old plugin doesn't work with Viva Terminal 5.19.2  
+
 ## 0.0.7 - 2024-09-17
 - Added support for more Terminal API calls
   (getActivationCode, reprintTransaction, setDecimalAmountMode, resetTerminal, batch, transactionDetails, fastRefund)
@@ -16,7 +20,7 @@
 
 ## 0.0.3 - 2024-02-15
 
-- Added ISV sales option thanks to [jousis9][https://github.com/jousis9]
+- Added ISV sales option thanks to [@jousis9](https://github.com/jousis9)
 
 ## 0.0.2 - 2022-08-25
 

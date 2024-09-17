@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.content.Context;
 import android.content.Intent;
 
+//import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
@@ -136,9 +138,7 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
   }
 
   // Send result to Flutter
-  public static void sendActivityResult() {
-    result.success(activityResult);
-  }
+  public static void sendActivityResult() { result.success(activityResult); }
 
   private String addArgument(MethodCall call, String argName) {
     if (call.hasArgument(argName) && call.argument(argName) != null) {
