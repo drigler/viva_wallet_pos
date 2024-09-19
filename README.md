@@ -10,11 +10,11 @@
 <a href="https://github.com/drigler/viva_wallet_pos"><img src="https://img.shields.io/github/stars/drigler/viva_wallet_pos.svg?style=flat&logo=github&colorB=deeppink&label=stars" alt="Star on Github"></a>
 <a href="https://github.com/drigler/viva_wallet_pos/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-BSD_3-blue.svg" alt="License: MIT"></a>
 </p>
-This is a flutter plugin for Android integration with Viva Wallet POS.
+This is a flutter plugin for Android integration with Viva Terminal.
 
-You can download POS app from [Google Play Store ](https://play.google.com/store/apps/details?id=com.vivawallet.spoc.payapp)
+You can download POS app from the official [Google Play Store ](https://play.google.com/store/apps/details?id=com.vivawallet.spoc.payapp)
 
-For demo acces you must use demo version of Viva Wallet Pos App. Contact VivaWallet for demo access. For now, only works on Android.
+For demo acces you must use demo version of Viva.com Terminal App. Contact Viva.com for demo access. For now, only works on Android.
 
 Feel free to add your contribution to this project on github.
 
