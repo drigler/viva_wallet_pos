@@ -92,3 +92,7 @@ debugPrint(e.toString());
 - [ ]  preauth request
 - [ ]  capture pre-auth request
 - [ ]  rebate request
+
+
+#### Copyright
+All trademarks, logos and brand names are the property of their respective owners. Use of these names,trademarks and brands does not imply endorsement.
