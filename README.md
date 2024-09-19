@@ -1,7 +1,7 @@
 # Viva Wallet POS Flutter
 </p>
 <p align="center">
-![viva_logo](https://github.com/user-attachments/assets/abb28e3e-a8e6-4006-9e2b-d4b37ee155e4)
+![](https://private-user-images.githubusercontent.com/34372972/368933043-abb28e3e-a8e6-4006-9e2b-d4b37ee155e4.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjY3NDA5MDMsIm5iZiI6MTcyNjc0MDYwMywicGF0aCI6Ii8zNDM3Mjk3Mi8zNjg5MzMwNDMtYWJiMjhlM2UtYThlNi00MDA2LTllMmItZDRiMzdlZTE1NWU0LmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA5MTklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwOTE5VDEwMTAwM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWY0YjRlNDM2ZjcyYmQzN2JmOWI4OTE0YjZmMzA4ZWQxYjY0NWRkYmJiNDYwNDFhNTQ4NjViYmE1MTU5NjFjYTYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.JjM4XXnLoxWMo0CFtEzwCp9VFau27qv3hOW_MNuCPho)
 </p>
 <p align="center">
 <a href="https://pub.dev/packages/viva_wallet_pos"><img src="https://img.shields.io/pub/v/viva_wallet_pos.svg" alt="Pub"></a>
