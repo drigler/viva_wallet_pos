@@ -5,7 +5,6 @@
 <p align="center">
 <a href="https://pub.dev/packages/viva_wallet_pos"><img src="https://img.shields.io/pub/v/viva_wallet_pos.svg" alt="Pub"></a>
 <a href="https://pub.dev/packages/viva_wallet_pos/score"><img src="https://img.shields.io/pub/likes/viva_wallet_pos?logo=dart" alt="Pub"></a>
-<a href="https://pub.dev/packages/viva_wallet_pos/score"><img src="https://img.shields.io/pub/popularity/viva_wallet_pos?logo=dart" alt="Pub"></a>
 <a href="https://pub.dev/packages/viva_wallet_pos/score"><img src="https://img.shields.io/pub/points/viva_wallet_pos?logo=dart" alt="Pub"></a>
 <a href="https://github.com/drigler/viva_wallet_pos"><img src="https://img.shields.io/github/stars/drigler/viva_wallet_pos.svg?style=flat&logo=github&colorB=deeppink&label=stars" alt="Star on Github"></a>
 <a href="https://github.com/drigler/viva_wallet_pos/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-BSD_3-blue.svg" alt="License: MIT"></a>
@@ -56,15 +55,15 @@ import 'package:viva_wallet_pos/viva_wallet_pos.dart';
 VivaWalletPos pos = VivaWalletpos();
 
 try {
-final response = await pos.isvSale(
-amount: 10.0,
-tipAmount: 0.2,
-isvAmount: 0.1,
-clientTransactionId: 'CLIENT_TRANS_ID',
-isvClientId: 'ISV_CLIENT_ID',
-isvClientSecret: 'ISV_CLIENT_SECRET',
-isvMerchantId: 'ISV_MERCHANT_ID',
-isvClientTransactionId: 'ISV_CLIENT_TRANS_ID',
+  final response = await pos.isvSale(
+  amount: 10.0,
+  tipAmount: 0.2,
+  isvAmount: 0.1,
+  clientTransactionId: 'CLIENT_TRANS_ID',
+  isvClientId: 'ISV_CLIENT_ID',
+  isvClientSecret: 'ISV_CLIENT_SECRET',
+  isvMerchantId: 'ISV_MERCHANT_ID',
+  isvClientTransactionId: 'ISV_CLIENT_TRANS_ID',
 );
 _resultMessage(response.message);
 } catch (e) {
