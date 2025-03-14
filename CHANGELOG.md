@@ -1,3 +1,6 @@
+## 0.0.9 - 2025-03-13
+  - Corrected rounding problem
+
 ## 0.0.8 - 2024-09-17
   - Changed the way plugin handles the result from Viva Terminal. Thanks to [@imGok](https://github.com/imGok) for the elegant solution.
   - All plugin users are required to update to this version, because old plugin doesn't work with Viva Terminal 5.19.2  

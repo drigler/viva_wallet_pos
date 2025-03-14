@@ -35,16 +35,17 @@ import 'package:viva_wallet_pos/viva_wallet_pos.dart';
 VivaWalletPos pos = VivaWalletpos();
 
 try {
-TransactionResponse response = await pos.sale(
-clientTransactionId: 'Invoice 1234',
-amount: 10.00,
-showRating: false,
-showReceipt: true,
-showTransactionResult: false,
+  TransactionResponse response = await pos.sale(
+  clientTransactionId: 'Invoice 1234',
+  amount: 10.00,
+  showRating: false,
+  showReceipt: true,
+  showTransactionResult: false,
 );
+  
 _resultMessage(response.message);
 } catch (e) {
-debugPrint(e.toString());
+  debugPrint(e.toString());
 }
 ```
 
@@ -95,4 +96,4 @@ debugPrint(e.toString());
 
 
 #### Copyright
-All trademarks, logos and brand names are the property of their respective owners. Use of these names,trademarks and brands does not imply endorsement.
+All trademarks, logos and brand names are the property of their respective owners. Use of these names, trademarks and brands does not imply endorsement.

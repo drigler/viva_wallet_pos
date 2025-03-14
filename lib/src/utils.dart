@@ -57,8 +57,9 @@ class ParamUtils {
   ///
   /// Amounts are represented as integers, last two digits of int are decimals
   static int doubleToAmount(double value) {
-    num mod = pow(10.0, 2);
-    return (((value * mod).round().toDouble() / mod) * 100).toInt();
+    //num mod = pow(10.0, 2);
+    //return (((value * mod).round().toDouble() / mod) * 100).toInt();
+    return (value*100).round();
   }
 
   /// Convert amount from string to double value
