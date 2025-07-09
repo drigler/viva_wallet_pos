@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a
 // MIT-style license that can be found in the LICENSE file.
 
+import 'dart:convert';
+
 import 'package:flutter/services.dart';
 
 import 'response.dart';
@@ -279,6 +281,7 @@ class VivaWalletPos {
     bool showReceipt = true,
     bool showTransactionResult = true,
     bool showRating = true,
+    Map<String, dynamic>? saleToAcquirerData,
   }) async {
     final Map<String, dynamic> params = <String, dynamic>{
       'merchantKey': merchantKey ?? 'deprecated',
@@ -289,6 +292,10 @@ class VivaWalletPos {
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
       'show_rating': showRating,
+      'saleToAcquirerData': saleToAcquirerData != null
+          ? base64Encode(
+              const Utf8Encoder().convert(saleToAcquirerData.toString()))
+          : null,
     };
 
     final data = await _invokePosMethod('saleRequest', params);
