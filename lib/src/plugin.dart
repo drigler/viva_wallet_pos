@@ -208,12 +208,12 @@ class VivaWalletPos {
   /// (https://developer.viva.com/apis-for-point-of-sale/card-terminal-apps/android-app/transaction-details/)
   Future<TransactionResponse> transactionDetails({
     String? merchantKey,
-    required String clientTransactiodId,
+    required String clientTransactionId,
     required String sourceTerminalId,
   }) async {
     final Map<String, dynamic> params = <String, dynamic>{
       'merchantKey': merchantKey ?? 'deprecated',
-      'clientTransactionId': clientTransactiodId,
+      'clientTransactionId': clientTransactionId,
       'sourceTerminalId': sourceTerminalId,
     };
     final data = await _invokePosMethod('transactionDetailsRequest', params);
