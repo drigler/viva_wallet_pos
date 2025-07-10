@@ -13,7 +13,8 @@ class ParamUtils {
   static Uri parseUri(String callback, String value) {
     if (value.isEmpty) {
       return Uri.parse(
-          'cb:?status=fail&message=Empty response received from Viva Wallet POS');
+        'cb:?status=fail&message=Empty response received from Viva Wallet POS',
+      );
     } else if (value.toLowerCase().contains('(-4) user_cancel')) {
       return Uri.parse('cb:?status=userCanceled&message=User canceled');
     } else {
@@ -21,7 +22,8 @@ class ParamUtils {
         return Uri.parse(value.replaceFirst(callback, 'cb:'));
       } on FormatException {
         return Uri.parse(
-            'cb:?status=fail&message=Invalid response received from Viva Wallet POS');
+          'cb:?status=fail&message=Invalid response received from Viva Wallet POS',
+        );
       }
     }
   }
@@ -59,7 +61,7 @@ class ParamUtils {
   static int doubleToAmount(double value) {
     //num mod = pow(10.0, 2);
     //return (((value * mod).round().toDouble() / mod) * 100).toInt();
-    return (value*100).round();
+    return (value * 100).round();
   }
 
   /// Convert amount from string to double value

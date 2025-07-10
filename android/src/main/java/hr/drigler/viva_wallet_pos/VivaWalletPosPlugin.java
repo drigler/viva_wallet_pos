@@ -265,6 +265,7 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
             + addArgument(call, "show_receipt")
             + addArgument(call, "show_transaction_result")
             + addArgument(call, "show_rating")
+            + addArgument(call, "saleToAcquirerData")
             + addArgument(call, "ISV_amount")
             + addArgument(call, "ISV_clientId")
             + addArgument(call, "ISV_clientSecret")

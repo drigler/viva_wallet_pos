@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a
 // MIT-style license that can be found in the LICENSE file.
 
+import 'dart:convert';
+
 import 'package:flutter/services.dart';
 
 import 'response.dart';
@@ -14,8 +16,9 @@ import 'utils.dart';
 /// (https://developer.vivawallet.com/apis-for-point-of-sale/)
 ///
 class VivaWalletPos {
-  final MethodChannel _methodChannel =
-      const MethodChannel('viva_wallet_pos/methods');
+  final MethodChannel _methodChannel = const MethodChannel(
+    'viva_wallet_pos/methods',
+  );
 
   String _callbackScheme = '';
 
@@ -27,12 +30,16 @@ class VivaWalletPos {
   // Invoke pos methods
   Future<String> _invokePosMethod(String methodName, Map? methodParams) async {
     if (_callbackScheme.isEmpty) {
-      _callbackScheme =
-          await _methodChannel.invokeMethod('getCallbackScheme', null);
+      _callbackScheme = await _methodChannel.invokeMethod(
+        'getCallbackScheme',
+        null,
+      );
     }
 
-    final response =
-        await _methodChannel.invokeMethod(methodName, methodParams);
+    final response = await _methodChannel.invokeMethod(
+      methodName,
+      methodParams,
+    );
 
     if (response != null) {
       return response;
@@ -116,25 +123,27 @@ class VivaWalletPos {
   /// Set printing settings
   ///
   /// (https://developer.vivawallet.com/apis-for-point-of-sale/card-terminal-apps/android-app/printing/)
-  Future<SetPrintingSettingsResponse> setPrintingSettings(
-      {bool? businessDescriptionEnabled,
-      BusinessDescriptionType? businessDescriptionType,
-      bool? printLogoOnMerchantReceipt,
-      bool? printVATOnMerchantReceipt,
-      bool? isBarcodeEnabled,
-      bool? printAddressOnReceipt,
-      bool? isMerchantReceiptEnabled,
-      bool? isCustomerReceiptEnabled}) async {
+  Future<SetPrintingSettingsResponse> setPrintingSettings({
+    bool? businessDescriptionEnabled,
+    BusinessDescriptionType? businessDescriptionType,
+    bool? printLogoOnMerchantReceipt,
+    bool? printVATOnMerchantReceipt,
+    bool? isBarcodeEnabled,
+    bool? printAddressOnReceipt,
+    bool? isMerchantReceiptEnabled,
+    bool? isCustomerReceiptEnabled,
+  }) async {
     final Map<String, dynamic> params = <String, dynamic>{
       'businessDescriptionEnabled': businessDescriptionEnabled,
-      'businessDescriptionType':
-          ParamUtils.bdTypeToString(businessDescriptionType),
+      'businessDescriptionType': ParamUtils.bdTypeToString(
+        businessDescriptionType,
+      ),
       'printLogoOnMerchantReceipt': printLogoOnMerchantReceipt,
       'printVATOnMerchantReceipt': printVATOnMerchantReceipt,
       'isBarcodeEnabled': isBarcodeEnabled,
       'printAddressOnReceipt': printAddressOnReceipt,
       'isMerchantReceiptEnabled': isMerchantReceiptEnabled,
-      'isCustomerReceiptEnabled': isCustomerReceiptEnabled
+      'isCustomerReceiptEnabled': isCustomerReceiptEnabled,
     };
 
     final data = await _invokePosMethod('setPrintingSettingsRequest', params);
@@ -159,9 +168,7 @@ class VivaWalletPos {
   /// Reset Terminal (soft or full reset)
   ///
   /// (https://developer.viva.com/apis-for-point-of-sale/card-terminal-apps/android-app/reset/)
-  Future<ResetTerminalResponse> resetTerminal({
-    bool softReset = true,
-  }) async {
+  Future<ResetTerminalResponse> resetTerminal({bool softReset = true}) async {
     final Map<String, dynamic> params = <String, dynamic>{
       'softReset': softReset,
     };
@@ -173,8 +180,9 @@ class VivaWalletPos {
   /// Reprint previously completed transaction
   ///
   /// (https://developer.viva.com/apis-for-point-of-sale/card-terminal-apps/android-app/reprint-transaction/)
-  Future<ReprintTransactionResponse> reprintTransaction(
-      {required String orderCode}) async {
+  Future<ReprintTransactionResponse> reprintTransaction({
+    required String orderCode,
+  }) async {
     final Map<String, dynamic> params = <String, dynamic>{
       'orderCode': orderCode,
     };
@@ -233,6 +241,7 @@ class VivaWalletPos {
     bool showReceipt = true,
     bool showTransactionResult = true,
     bool showRating = true,
+    Map<String, dynamic>? saleToAcquirerData,
     double? isvAmount,
     required String isvClientId,
     required String isvClientSecret,
@@ -252,6 +261,12 @@ class VivaWalletPos {
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
       'show_rating': showRating,
+      'saleToAcquirerData':
+          saleToAcquirerData != null
+              ? base64Encode(
+                const Utf8Encoder().convert(saleToAcquirerData.toString()),
+              )
+              : null,
       'ISV_amount': ParamUtils.doubleToAmount(isvAmount ?? 0.0),
       'ISV_clientId': isvClientId,
       'ISV_clientSecret': isvClientSecret,
@@ -279,6 +294,7 @@ class VivaWalletPos {
     bool showReceipt = true,
     bool showTransactionResult = true,
     bool showRating = true,
+    Map<String, dynamic>? saleToAcquirerData,
   }) async {
     final Map<String, dynamic> params = <String, dynamic>{
       'merchantKey': merchantKey ?? 'deprecated',
@@ -289,6 +305,12 @@ class VivaWalletPos {
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
       'show_rating': showRating,
+      'saleToAcquirerData':
+          saleToAcquirerData != null
+              ? base64Encode(
+                const Utf8Encoder().convert(saleToAcquirerData.toString()),
+              )
+              : null,
     };
 
     final data = await _invokePosMethod('saleRequest', params);

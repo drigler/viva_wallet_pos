@@ -25,9 +25,10 @@ class ActivationResponse extends BaseResponse {
       message: uri.queryParameters['message'] ?? '',
       rawData: data,
       virtualId: uri.queryParameters['virtualId'],
-      sourceTerminalId: uri.queryParameters['sourceTerminalId'] != null
-          ? int.parse(uri.queryParameters['sourceTerminalId']!)
-          : null,
+      sourceTerminalId:
+          uri.queryParameters['sourceTerminalId'] != null
+              ? int.parse(uri.queryParameters['sourceTerminalId']!)
+              : null,
       merchantID: uri.queryParameters['merchantID'],
     );
   }
@@ -60,11 +61,8 @@ class GetActivationCodeResponse extends BaseResponse {
 
 /// Response from [setMode] request
 class SetModeResponse extends BaseResponse {
-  SetModeResponse({
-    required status,
-    required message,
-    required rawData,
-  }) : super(status: status, message: message, rawData: rawData);
+  SetModeResponse({required status, required message, required rawData})
+    : super(status: status, message: message, rawData: rawData);
 
   factory SetModeResponse.create(String cb, String data) {
     Uri uri = ParamUtils.parseUri(cb, data);
@@ -110,21 +108,29 @@ class SetPrintingSettingsResponse extends BaseResponse {
       message: uri.queryParameters['message'] ?? '',
       rawData: data,
       businessDescriptionType: ParamUtils.stringToBdType(
-          uri.queryParameters['businessDescriptionType']),
+        uri.queryParameters['businessDescriptionType'],
+      ),
       printLogoOnMerchantReceipt: ParamUtils.paramToBool(
-          uri.queryParameters['printLogoOnMerchantReceipt']),
+        uri.queryParameters['printLogoOnMerchantReceipt'],
+      ),
       printVATOnMerchantReceipt: ParamUtils.paramToBool(
-          uri.queryParameters['printVATOnMerchantReceipt']),
-      isBarcodeEnabled:
-          ParamUtils.paramToBool(uri.queryParameters['isBarcodeEnabled']),
+        uri.queryParameters['printVATOnMerchantReceipt'],
+      ),
+      isBarcodeEnabled: ParamUtils.paramToBool(
+        uri.queryParameters['isBarcodeEnabled'],
+      ),
       businessDescriptionEnabled: ParamUtils.paramToBool(
-          uri.queryParameters['businessDescriptionEnabled']),
-      printAddressOnReceipt:
-          ParamUtils.paramToBool(uri.queryParameters['printAddressOnReceipt']),
+        uri.queryParameters['businessDescriptionEnabled'],
+      ),
+      printAddressOnReceipt: ParamUtils.paramToBool(
+        uri.queryParameters['printAddressOnReceipt'],
+      ),
       isMerchantReceiptEnabled: ParamUtils.paramToBool(
-          uri.queryParameters['isMerchantReceiptEnabled']),
+        uri.queryParameters['isMerchantReceiptEnabled'],
+      ),
       isCustomerReceiptEnabled: ParamUtils.paramToBool(
-          uri.queryParameters['isCustomerReceiptEnabled']),
+        uri.queryParameters['isCustomerReceiptEnabled'],
+      ),
     );
   }
 }
@@ -150,11 +156,8 @@ class SetDecimalAmountModeResponse extends BaseResponse {
 
 /// Response from [resetTerminalRequest] request
 class ResetTerminalResponse extends BaseResponse {
-  ResetTerminalResponse({
-    required status,
-    required message,
-    required rawData,
-  }) : super(status: status, message: message, rawData: rawData);
+  ResetTerminalResponse({required status, required message, required rawData})
+    : super(status: status, message: message, rawData: rawData);
 
   factory ResetTerminalResponse.create(String cb, String data) {
     Uri uri = ParamUtils.parseUri(cb, data);
@@ -203,21 +206,19 @@ class BatchResponse extends BaseResponse {
     Uri uri = ParamUtils.parseUri(cb, data);
 
     return BatchResponse(
-        status: ParamUtils.statusFromString(uri.queryParameters['status']),
-        message: uri.queryParameters['message'] ?? '',
-        rawData: data,
-        batchId: uri.queryParameters['batchId'] ?? '',
-        batchName: uri.queryParameters['batchName'] ?? '');
+      status: ParamUtils.statusFromString(uri.queryParameters['status']),
+      message: uri.queryParameters['message'] ?? '',
+      rawData: data,
+      batchId: uri.queryParameters['batchId'] ?? '',
+      batchName: uri.queryParameters['batchName'] ?? '',
+    );
   }
 }
 
 /// Response from [sendLogs] request
 class SendLogsResponse extends BaseResponse {
-  SendLogsResponse({
-    required status,
-    required message,
-    required rawData,
-  }) : super(status: status, message: message, rawData: rawData);
+  SendLogsResponse({required status, required message, required rawData})
+    : super(status: status, message: message, rawData: rawData);
 
   factory SendLogsResponse.create(String cb, String data) {
     Uri uri = ParamUtils.parseUri(cb, data);
@@ -299,8 +300,9 @@ class TransactionResponse extends BaseResponse {
       aid: uri.queryParameters['aid'],
       orderCode: uri.queryParameters['orderCode'],
       shortOrderCode: uri.queryParameters['shortOrderCode'],
-      transactionDate:
-          ParamUtils.paramToDateTime(uri.queryParameters['transactionDate']),
+      transactionDate: ParamUtils.paramToDateTime(
+        uri.queryParameters['transactionDate'],
+      ),
       transactionId: uri.queryParameters['transactionId'],
       isvAmount: ParamUtils.paramToDouble(uri.queryParameters['ISV_amount']),
       isvClientId: uri.queryParameters['ISV_clientId'],
@@ -354,11 +356,8 @@ class FastRefundResponse extends BaseResponse {
 
 /// Response from [abort] request
 class AbortResponse extends BaseResponse {
-  AbortResponse({
-    required status,
-    required message,
-    required rawData,
-  }) : super(status: status, message: message, rawData: rawData);
+  AbortResponse({required status, required message, required rawData})
+    : super(status: status, message: message, rawData: rawData);
 
   factory AbortResponse.create(String cb, String data) {
     Uri uri = ParamUtils.parseUri(cb, data);

@@ -1,3 +1,6 @@
+## 0.1.0 - 2025-07-10
+- Added saleToAcquirerData parameter
+
 ## 0.0.9 - 2025-03-13
   - Corrected rounding problem
 
