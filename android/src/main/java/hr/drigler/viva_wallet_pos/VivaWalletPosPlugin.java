@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Base64;
+import java.nio.charset.StandardCharsets;
 
 //import android.util.Log;
 
@@ -159,7 +160,9 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
       String value = call.argument(argName).toString();
       try {
         if (useBase64) {
-          value = Base64.encodeToString(value.getBytes("UTF-8"), Base64.NO_WRAP);
+          value = Base64.encodeToString(
+              value.getBytes(StandardCharsets.UTF_8),
+              Base64.URL_SAFE | Base64.NO_WRAP);
         } else {
           value = Uri.encode(value);
         }
