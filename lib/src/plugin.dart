@@ -261,12 +261,11 @@ class VivaWalletPos {
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
       'show_rating': showRating,
-      'saleToAcquirerData':
-          saleToAcquirerData != null
-              ? base64Encode(
-                const Utf8Encoder().convert(saleToAcquirerData.toString()),
-              )
-              : null,
+      'saleToAcquirerData': saleToAcquirerData != null
+          ? base64Encode(
+              const Utf8Encoder().convert(saleToAcquirerData.toString()),
+            )
+          : null,
       'ISV_amount': ParamUtils.doubleToAmount(isvAmount ?? 0.0),
       'ISV_clientId': isvClientId,
       'ISV_clientSecret': isvClientSecret,
@@ -279,6 +278,89 @@ class VivaWalletPos {
     };
 
     final data = await _invokePosMethod('saleRequest', params);
+
+    return TransactionResponse.create(_callbackScheme, data);
+  }
+
+  /// Make a sale with Viva Fiscalisation for Greece for ISV
+  ///
+  /// (https://developer.vivawallet.com/apis-for-point-of-sale/card-terminal-apps/android-app/sale/)
+  Future<TransactionResponse> saleVivaIsvFiscalGreece({
+    required String clientTransactionId,
+    required int amount,
+    int? tipAmount,
+    String? isvClientId,
+    String? isvClientSecret,
+    int? isvAmount,
+    int? isvCurrencyCode,
+    int? isvSourceCode,
+    String? isvCustomerTrns,
+    String? isvClientTransactionId,
+    bool showReceipt = true,
+    bool showTransactionResult = true,
+    String? fiscalisationData,
+  }) async {
+    final Map<String, dynamic> params = <String, dynamic>{
+      'clientTransactionId': clientTransactionId,
+      'amount': amount,
+      'tipAmount': tipAmount ?? 0,
+      'ISV_clientId': isvClientId,
+      'ISV_clientSecret': isvClientSecret,
+      'ISV_amount': isvAmount,
+      'ISV_currencyCode': isvCurrencyCode,
+      'ISV_sourceCode': isvSourceCode,
+      'ISV_customerTrns': isvCustomerTrns,
+      'ISV_clientTransactionId': isvClientTransactionId,
+      'show_receipt': showReceipt,
+      'show_transaction_result': showTransactionResult,
+      'fiscalisationData': fiscalisationData,
+    };
+
+    final data = await _invokePosMethod('saleVivaIsvFiscalGreece', params);
+
+    return TransactionResponse.create(_callbackScheme, data);
+  }
+
+  /// Make a sale for Greece AADE parameters for Providers except Viva Fiscal
+  ///
+  /// (https://developer.vivawallet.com/apis-for-point-of-sale/card-terminal-apps/android-app/sale/)
+  Future<TransactionResponse> saleRequestGreeceAade({
+    required String clientTransactionId,
+    required double amount,
+    int? aadeProviderId,
+    String? aadeProviderSignatureData,
+    String? aadeProviderSignature,
+    double? tipAmount,
+    String? isvClientId,
+    String? isvClientSecret,
+    int? isvAmount,
+    int? isvCurrencyCode,
+    int? isvSourceCode,
+    String? isvCustomerTrns,
+    String? isvClientTransactionId,
+    bool showReceipt = true,
+    bool showTransactionResult = true,
+  }) async {
+    final Map<String, dynamic> params = <String, dynamic>{
+      'clientTransactionId': clientTransactionId,
+      'amount': ParamUtils.doubleToAmount(amount),
+      'tipAmount':
+          tipAmount != null ? ParamUtils.doubleToAmount(tipAmount) : null,
+      'ISV_clientId': isvClientId,
+      'ISV_clientSecret': isvClientSecret,
+      'ISV_amount': isvAmount,
+      'ISV_currencyCode': isvCurrencyCode,
+      'ISV_sourceCode': isvSourceCode,
+      'ISV_customerTrns': isvCustomerTrns,
+      'ISV_clientTransactionId': isvClientTransactionId,
+      'show_receipt': showReceipt,
+      'show_transaction_result': showTransactionResult,
+      'aadeProviderId': aadeProviderId,
+      'aadeProviderSignatureData': aadeProviderSignatureData,
+      'aadeProviderSignature': aadeProviderSignature,
+    };
+
+    final data = await _invokePosMethod('saleRequestGreeceAade', params);
 
     return TransactionResponse.create(_callbackScheme, data);
   }
@@ -305,12 +387,11 @@ class VivaWalletPos {
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
       'show_rating': showRating,
-      'saleToAcquirerData':
-          saleToAcquirerData != null
-              ? base64Encode(
-                const Utf8Encoder().convert(saleToAcquirerData.toString()),
-              )
-              : null,
+      'saleToAcquirerData': saleToAcquirerData != null
+          ? base64Encode(
+              const Utf8Encoder().convert(saleToAcquirerData.toString()),
+            )
+          : null,
     };
 
     final data = await _invokePosMethod('saleRequest', params);
@@ -348,6 +429,35 @@ class VivaWalletPos {
     };
 
     String data = await _invokePosMethod('cancelRequest', params);
+
+    // When using pin if user presses back button and cancels to enter pin
+    // POS response is just empty so change it to cancel
+    if (data.isEmpty) {
+      data = 'cb:?status=userCanceled&message=User canceled';
+    }
+
+    return TransactionResponse.create(_callbackScheme, data);
+  }
+
+  // Cancel transaction -> using action send_money_fast_refund which is recommended for Greece Fiscalisation
+  ///
+  /// (https://developer.vivawallet.com/apis-for-point-of-sale/card-terminal-apps/android-app/cancel/)
+  Future<TransactionResponse> cancelVivaFiscalGreece({
+    required int amount,
+    String? orderCode,
+    bool showReceipt = true,
+    bool showTransactionResult = true,
+    String? fiscalisationData,
+  }) async {
+    final Map<String, dynamic> params = <String, dynamic>{
+      'amount': amount,
+      'orderCode': orderCode,
+      'show_receipt': showReceipt,
+      'show_transaction_result': showTransactionResult,
+      'fiscalisationData': fiscalisationData,
+    };
+
+    String data = await _invokePosMethod('cancelVivaFiscalGreece', params);
 
     // When using pin if user presses back button and cancels to enter pin
     // POS response is just empty so change it to cancel
