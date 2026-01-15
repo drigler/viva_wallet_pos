@@ -1,3 +1,7 @@
+## 0.1.1 - 2026-01-15
+- Added support for Greek fiscalisation. Thanks to [@fotis-psarris](https://github.com/fotis-psarris) for contribution.
+- New functions are (saleVivaIsvFiscalGreece, saleRequestGreeceAade, cancelVivaFiscalGreece)
+ 
 ## 0.1.0 - 2025-07-10
 - Added saleToAcquirerData parameter
 
