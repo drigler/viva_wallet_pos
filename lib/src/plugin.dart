@@ -59,6 +59,7 @@ class VivaWalletPos {
     bool skipExternalDeviceSetup = true,
     bool activateMoto = false,
     bool activateQRCodes = false,
+    AppOrientation appOrientation = AppOrientation.portrait,
   }) async {
     final Map<String, dynamic> params = <String, dynamic>{
       'apikey': apikey,
@@ -68,6 +69,7 @@ class VivaWalletPos {
       'skipExternalDeviceSetup': skipExternalDeviceSetup,
       'activateMoto': activateMoto,
       'activateQRCodes': activateQRCodes,
+      'appOrientation': appOrientation.index,
     };
 
     final data = await _invokePosMethod('activatePos', params);
