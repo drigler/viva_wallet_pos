@@ -60,11 +60,8 @@ class GetActivationCodeResponse extends BaseResponse {
 
 /// Response from [setMode] request
 class SetModeResponse extends BaseResponse {
-  SetModeResponse({
-    required status,
-    required message,
-    required rawData,
-  }) : super(status: status, message: message, rawData: rawData);
+  SetModeResponse({required status, required message, required rawData})
+      : super(status: status, message: message, rawData: rawData);
 
   factory SetModeResponse.create(String cb, String data) {
     Uri uri = ParamUtils.parseUri(cb, data);
@@ -150,11 +147,8 @@ class SetDecimalAmountModeResponse extends BaseResponse {
 
 /// Response from [resetTerminalRequest] request
 class ResetTerminalResponse extends BaseResponse {
-  ResetTerminalResponse({
-    required status,
-    required message,
-    required rawData,
-  }) : super(status: status, message: message, rawData: rawData);
+  ResetTerminalResponse({required status, required message, required rawData})
+      : super(status: status, message: message, rawData: rawData);
 
   factory ResetTerminalResponse.create(String cb, String data) {
     Uri uri = ParamUtils.parseUri(cb, data);
@@ -213,11 +207,8 @@ class BatchResponse extends BaseResponse {
 
 /// Response from [sendLogs] request
 class SendLogsResponse extends BaseResponse {
-  SendLogsResponse({
-    required status,
-    required message,
-    required rawData,
-  }) : super(status: status, message: message, rawData: rawData);
+  SendLogsResponse({required status, required message, required rawData})
+      : super(status: status, message: message, rawData: rawData);
 
   factory SendLogsResponse.create(String cb, String data) {
     Uri uri = ParamUtils.parseUri(cb, data);
@@ -400,11 +391,8 @@ class FastRefundResponse extends BaseResponse {
 
 /// Response from [abort] request
 class AbortResponse extends BaseResponse {
-  AbortResponse({
-    required status,
-    required message,
-    required rawData,
-  }) : super(status: status, message: message, rawData: rawData);
+  AbortResponse({required status, required message, required rawData})
+      : super(status: status, message: message, rawData: rawData);
 
   factory AbortResponse.create(String cb, String data) {
     Uri uri = ParamUtils.parseUri(cb, data);

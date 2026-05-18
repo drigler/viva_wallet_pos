@@ -192,6 +192,7 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
         + addArgument(call, "skipExternalDeviceSetup")
         + addArgument(call, "activateMoto")
         + addArgument(call, "activateQRCodes")
+        + addArgument(call, "appOrientation")
         + "&callback=" + callbackScheme;
 
     sendRequest(request);

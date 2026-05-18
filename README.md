@@ -84,7 +84,10 @@ debugPrint(e.toString());
 - [x]  reprintTransaction
 - [x]  sendLogs
 - [x]  sale
-- [x]  isvSale (new thanks to jousis9 see https://github.com/drigler/viva_wallet_pos/pull/1)
+- [x]  isvSale (new thanks to @jousis9 see https://github.com/drigler/viva_wallet_pos/pull/1)
+- [x]  saleVivaIsvFiscalGreece (new tahnks to @fotis-psarris see https://github.com/drigler/viva_wallet_pos/pull/11)
+- [x]  saleRequestGreeceAade (new tahnks to @fotis-psarris see https://github.com/drigler/viva_wallet_pos/pull/11)
+- [X]  cancelVivaFiscalGreece (new tahnks to @fotis-psarris see https://github.com/drigler/viva_wallet_pos/pull/11)
 - [x]  cancel
 - [x]  abort
 

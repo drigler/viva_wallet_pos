@@ -21,3 +21,10 @@ enum TransactionStatus { fail, success, userCanceled }
 /// Batch request action
 ///
 enum BatchCommand { open, close }
+
+///
+/// App screen orientation for POS activation
+///
+/// landscape = 0, portrait = 1 (default)
+///
+enum AppOrientation { landscape, portrait }
