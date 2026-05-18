@@ -25,6 +25,8 @@ flutter:
       android:
         package: hr.drigler.viva_wallet_pos
         pluginClass: VivaWalletPosPlugin
+      ios:
+        pluginClass: VivaWalletPosPlugin
 
 
 topics:
