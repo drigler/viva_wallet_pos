@@ -1,3 +1,7 @@
+## 0.2.0 - 2026-05-18
+- Added support for iOS. Big thanks to [@fotis-psarris](https://github.com/fotis-psarris)
+- See details on [GitHub](https://github.com/drigler/viva_wallet_pos/pull/13)
+
 ## 0.1.1 - 2026-01-15
 - Added support for Greek fiscalisation. Thanks to [@fotis-psarris](https://github.com/fotis-psarris) for contribution.
 - New functions are (saleVivaIsvFiscalGreece, saleRequestGreeceAade, cancelVivaFiscalGreece)
