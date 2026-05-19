@@ -1,3 +1,6 @@
+## 0.2.1 - 2026-05-19
+- Graddle plugin changes
+
 ## 0.2.0 - 2026-05-18
 - Added support for iOS. Big thanks to [@fotis-psarris](https://github.com/fotis-psarris)
 - See details on [GitHub](https://github.com/drigler/viva_wallet_pos/pull/13)
