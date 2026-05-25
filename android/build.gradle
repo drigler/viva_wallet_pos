@@ -1,4 +1,4 @@
-group = "com.example.viva_wallet_pos"
+group = "com.drigler.viva_wallet_pos"
 version = "1.0-SNAPSHOT"
 
 buildscript {
@@ -25,7 +25,7 @@ apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
 android {
-    namespace = "com.example.viva_wallet_pos"
+    namespace = "hr.drigler.viva_wallet_pos"
 
     compileSdk = 36
 
