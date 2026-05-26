@@ -1,3 +1,8 @@
+## 0.2.2 - 2026-05-26
+- Corrected build.graddle
+- Corrected typo in parameter clientTransactionId
+- Removed old .kt files
+
 ## 0.2.1 - 2026-05-19
 - Graddle plugin changes
 

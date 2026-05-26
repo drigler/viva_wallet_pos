@@ -105,7 +105,7 @@ class _MyAppState extends State<MyApp> {
   void _transactionDetails() async {
     try {
       TransactionResponse response = await _pos.transactionDetails(
-        clientTransactiodId: '1234567890123456789',
+        clientTransactionId: '1234567890123456789',
         sourceTerminalId: '12345',
       );
       _resultMessage(response.message, response.status);

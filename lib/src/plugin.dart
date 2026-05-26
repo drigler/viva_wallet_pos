@@ -218,12 +218,12 @@ class VivaWalletPos {
   /// (https://developer.viva.com/apis-for-point-of-sale/card-terminal-apps/android-app/transaction-details/)
   Future<TransactionResponse> transactionDetails({
     String? merchantKey,
-    required String clientTransactiodId,
+    required String clientTransactionId,
     required String sourceTerminalId,
   }) async {
     final Map<String, dynamic> params = <String, dynamic>{
       'merchantKey': merchantKey ?? 'deprecated',
-      'clientTransactionId': clientTransactiodId,
+      'clientTransactionId': clientTransactionId,
       'sourceTerminalId': sourceTerminalId,
     };
     final data = await _invokePosMethod('transactionDetailsRequest', params);
@@ -258,8 +258,9 @@ class VivaWalletPos {
       'merchantKey': merchantKey ?? 'deprecated',
       'clientTransactionId': clientTransactionId,
       'amount': ParamUtils.doubleToAmount(amount),
-      'tipAmount':
-          tipAmount != null ? ParamUtils.doubleToAmount(tipAmount) : null,
+      'tipAmount': tipAmount != null
+          ? ParamUtils.doubleToAmount(tipAmount)
+          : null,
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
       'show_rating': showRating,
@@ -329,7 +330,7 @@ class VivaWalletPos {
   Future<TransactionResponse> saleRequestGreeceAade({
     required String clientTransactionId,
     required double amount,
-    int? aadeProviderId,
+    String? aadeProviderId,
     String? aadeProviderSignatureData,
     String? aadeProviderSignature,
     double? tipAmount,
@@ -346,8 +347,9 @@ class VivaWalletPos {
     final Map<String, dynamic> params = <String, dynamic>{
       'clientTransactionId': clientTransactionId,
       'amount': ParamUtils.doubleToAmount(amount),
-      'tipAmount':
-          tipAmount != null ? ParamUtils.doubleToAmount(tipAmount) : null,
+      'tipAmount': tipAmount != null
+          ? ParamUtils.doubleToAmount(tipAmount)
+          : null,
       'ISV_clientId': isvClientId,
       'ISV_clientSecret': isvClientSecret,
       'ISV_amount': isvAmount,
@@ -384,8 +386,9 @@ class VivaWalletPos {
       'merchantKey': merchantKey ?? 'deprecated',
       'clientTransactionId': clientTransactionId,
       'amount': ParamUtils.doubleToAmount(amount),
-      'tipAmount':
-          tipAmount != null ? ParamUtils.doubleToAmount(tipAmount) : null,
+      'tipAmount': tipAmount != null
+          ? ParamUtils.doubleToAmount(tipAmount)
+          : null,
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
       'show_rating': showRating,
@@ -422,8 +425,9 @@ class VivaWalletPos {
       'amount': ParamUtils.doubleToAmount(amount),
       'orderCode': orderCode,
       'shortOrderCode': shortOrderCode,
-      'txnDateFrom':
-          txnDateFrom != null ? '${txnDateFrom.toIso8601String()}Z' : null,
+      'txnDateFrom': txnDateFrom != null
+          ? '${txnDateFrom.toIso8601String()}Z'
+          : null,
       'txnDateTo': txnDateTo != null ? '${txnDateTo.toIso8601String()}Z' : null,
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
