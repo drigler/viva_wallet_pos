@@ -258,9 +258,8 @@ class VivaWalletPos {
       'merchantKey': merchantKey ?? 'deprecated',
       'clientTransactionId': clientTransactionId,
       'amount': ParamUtils.doubleToAmount(amount),
-      'tipAmount': tipAmount != null
-          ? ParamUtils.doubleToAmount(tipAmount)
-          : null,
+      'tipAmount':
+          tipAmount != null ? ParamUtils.doubleToAmount(tipAmount) : null,
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
       'show_rating': showRating,
@@ -347,9 +346,8 @@ class VivaWalletPos {
     final Map<String, dynamic> params = <String, dynamic>{
       'clientTransactionId': clientTransactionId,
       'amount': ParamUtils.doubleToAmount(amount),
-      'tipAmount': tipAmount != null
-          ? ParamUtils.doubleToAmount(tipAmount)
-          : null,
+      'tipAmount':
+          tipAmount != null ? ParamUtils.doubleToAmount(tipAmount) : null,
       'ISV_clientId': isvClientId,
       'ISV_clientSecret': isvClientSecret,
       'ISV_amount': isvAmount,
@@ -386,9 +384,8 @@ class VivaWalletPos {
       'merchantKey': merchantKey ?? 'deprecated',
       'clientTransactionId': clientTransactionId,
       'amount': ParamUtils.doubleToAmount(amount),
-      'tipAmount': tipAmount != null
-          ? ParamUtils.doubleToAmount(tipAmount)
-          : null,
+      'tipAmount':
+          tipAmount != null ? ParamUtils.doubleToAmount(tipAmount) : null,
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
       'show_rating': showRating,
@@ -418,6 +415,9 @@ class VivaWalletPos {
     bool showReceipt = true,
     bool showTransactionResult = true,
     bool showRating = true,
+    String? aadeProviderId,
+    String? aadeProviderSignatureData,
+    String? aadeProviderSignature,
   }) async {
     final Map<String, dynamic> params = <String, dynamic>{
       'merchantKey': merchantKey ?? 'deprecated',
@@ -425,13 +425,15 @@ class VivaWalletPos {
       'amount': ParamUtils.doubleToAmount(amount),
       'orderCode': orderCode,
       'shortOrderCode': shortOrderCode,
-      'txnDateFrom': txnDateFrom != null
-          ? '${txnDateFrom.toIso8601String()}Z'
-          : null,
+      'txnDateFrom':
+          txnDateFrom != null ? '${txnDateFrom.toIso8601String()}Z' : null,
       'txnDateTo': txnDateTo != null ? '${txnDateTo.toIso8601String()}Z' : null,
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
       'show_rating': showRating,
+      'aadeProviderId': aadeProviderId,
+      'aadeProviderSignatureData': aadeProviderSignatureData,
+      'aadeProviderSignature': aadeProviderSignature,
     };
 
     String data = await _invokePosMethod('cancelRequest', params);
