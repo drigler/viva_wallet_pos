@@ -405,6 +405,9 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
         + addArgument(call, "show_receipt")
         + addArgument(call, "show_transaction_result")
         + addArgument(call, "show_rating")
+        + addArgument(call, "aadeProviderId")
+        + addArgument(call, "aadeProviderSignatureData")
+        + addArgument(call, "aadeProviderSignature")
         + "&protocol=int_default"
         + "&callback=" + callbackScheme;
 

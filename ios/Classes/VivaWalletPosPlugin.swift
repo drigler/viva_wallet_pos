@@ -161,9 +161,20 @@ public class VivaWalletPosPlugin: NSObject, FlutterPlugin, UIApplicationDelegate
   }
 
   private func normalizeToString(_ value: Any) -> String {
-    if let b = value as? Bool { return b ? "true" : "false" }
-    if let n = value as? NSNumber, CFGetTypeID(n) == CFBooleanGetTypeID() {
-      return n.boolValue ? "true" : "false"
+    if value is NSNull {
+      return ""
+    }
+
+    if let n = value as? NSNumber {
+      if CFGetTypeID(n) == CFBooleanGetTypeID() {
+        return n.boolValue ? "true" : "false"
+      }
+
+      return n.stringValue
+    }
+
+    if let b = value as? Bool {
+      return b ? "true" : "false"
     }
     return String(describing: value)
   }
