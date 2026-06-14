@@ -61,7 +61,7 @@ class GetActivationCodeResponse extends BaseResponse {
 /// Response from [setMode] request
 class SetModeResponse extends BaseResponse {
   SetModeResponse({required status, required message, required rawData})
-    : super(status: status, message: message, rawData: rawData);
+      : super(status: status, message: message, rawData: rawData);
 
   factory SetModeResponse.create(String cb, String data) {
     Uri uri = ParamUtils.parseUri(cb, data);
@@ -156,7 +156,7 @@ class SetDecimalAmountModeResponse extends BaseResponse {
 /// Response from [resetTerminalRequest] request
 class ResetTerminalResponse extends BaseResponse {
   ResetTerminalResponse({required status, required message, required rawData})
-    : super(status: status, message: message, rawData: rawData);
+      : super(status: status, message: message, rawData: rawData);
 
   factory ResetTerminalResponse.create(String cb, String data) {
     Uri uri = ParamUtils.parseUri(cb, data);
@@ -217,7 +217,7 @@ class BatchResponse extends BaseResponse {
 /// Response from [sendLogs] request
 class SendLogsResponse extends BaseResponse {
   SendLogsResponse({required status, required message, required rawData})
-    : super(status: status, message: message, rawData: rawData);
+      : super(status: status, message: message, rawData: rawData);
 
   factory SendLogsResponse.create(String cb, String data) {
     Uri uri = ParamUtils.parseUri(cb, data);
@@ -331,31 +331,31 @@ class TransactionResponse extends BaseResponse {
   }
 
   Map<String, dynamic> toJson() => {
-    'status': status.name,
-    'message': message,
-    'rawData': rawData,
-    'clientTransactionId': clientTransactionId,
-    'amount': amount,
-    'tipAmount': tipAmount,
-    'verificationMethod': verificationMethod,
-    'rrn': rrn,
-    'cardType': cardType,
-    'referenceNumber': referenceNumber,
-    'accountNumber': accountNumber,
-    'authorisationCode': authorisationCode,
-    'tid': tid,
-    'aid': aid,
-    'orderCode': orderCode,
-    'shortOrderCode': shortOrderCode,
-    'transactionDate': transactionDate?.toIso8601String(),
-    'transactionId': transactionId,
-    'isvAmount': isvAmount,
-    'isvClientId': isvClientId,
-    'isvClientSecret': isvClientSecret,
-    'isvMerchantId': isvMerchantId,
-    'currency': currency,
-    'fiscalisationSigningDetails': fiscalisationSigningDetails,
-  };
+        'status': status.name,
+        'message': message,
+        'rawData': rawData,
+        'clientTransactionId': clientTransactionId,
+        'amount': amount,
+        'tipAmount': tipAmount,
+        'verificationMethod': verificationMethod,
+        'rrn': rrn,
+        'cardType': cardType,
+        'referenceNumber': referenceNumber,
+        'accountNumber': accountNumber,
+        'authorisationCode': authorisationCode,
+        'tid': tid,
+        'aid': aid,
+        'orderCode': orderCode,
+        'shortOrderCode': shortOrderCode,
+        'transactionDate': transactionDate?.toIso8601String(),
+        'transactionId': transactionId,
+        'isvAmount': isvAmount,
+        'isvClientId': isvClientId,
+        'isvClientSecret': isvClientSecret,
+        'isvMerchantId': isvMerchantId,
+        'currency': currency,
+        'fiscalisationSigningDetails': fiscalisationSigningDetails,
+      };
 }
 
 /// Fast Refund response  from [fastRefund] request
@@ -402,7 +402,7 @@ class FastRefundResponse extends BaseResponse {
 /// Response from [abort] request
 class AbortResponse extends BaseResponse {
   AbortResponse({required status, required message, required rawData})
-    : super(status: status, message: message, rawData: rawData);
+      : super(status: status, message: message, rawData: rawData);
 
   factory AbortResponse.create(String cb, String data) {
     Uri uri = ParamUtils.parseUri(cb, data);

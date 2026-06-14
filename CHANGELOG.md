@@ -1,4 +1,7 @@
 ## 0.2.2 - 2026-05-26
+- Added aade parameters to cancel function [@fotis-psarris](https://github.com/drigler/viva_wallet_pos/pull/16)
+ 
+## 0.2.2 - 2026-05-26
 - Corrected build.graddle
 - Corrected typo in parameter clientTransactionId
 - Removed old .kt files
