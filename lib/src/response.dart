@@ -9,9 +9,9 @@ import 'utils.dart';
 /// Response from [activatePos] request
 class ActivationResponse extends BaseResponse {
   ActivationResponse({
-    required status,
-    required message,
-    required rawData,
+    required TransactionStatus status,
+    required String message,
+    required String rawData,
     String? virtualId,
     int? sourceTerminalId,
     String? merchantID,
@@ -36,9 +36,9 @@ class ActivationResponse extends BaseResponse {
 /// Response from [getActivationCode] request
 class GetActivationCodeResponse extends BaseResponse {
   GetActivationCodeResponse({
-    required status,
-    required message,
-    required rawData,
+    required TransactionStatus status,
+    required String message,
+    required String rawData,
     String? virtualId,
     String? activationCode,
     String? merchantID,
@@ -60,7 +60,7 @@ class GetActivationCodeResponse extends BaseResponse {
 
 /// Response from [setMode] request
 class SetModeResponse extends BaseResponse {
-  SetModeResponse({required status, required message, required rawData})
+  SetModeResponse({required TransactionStatus status, required String message, required String rawData})
       : super(status: status, message: message, rawData: rawData);
 
   factory SetModeResponse.create(String cb, String data) {
@@ -86,9 +86,9 @@ class SetPrintingSettingsResponse extends BaseResponse {
   final bool isCustomerReceiptEnabled;
 
   SetPrintingSettingsResponse({
-    required status,
-    required message,
-    required rawData,
+    required TransactionStatus status,
+    required String message,
+    required String rawData,
     required this.businessDescriptionType,
     required this.printLogoOnMerchantReceipt,
     required this.printVATOnMerchantReceipt,
@@ -137,9 +137,9 @@ class SetPrintingSettingsResponse extends BaseResponse {
 /// Response from [setDecimalAmountModeRequest] request
 class SetDecimalAmountModeResponse extends BaseResponse {
   SetDecimalAmountModeResponse({
-    required status,
-    required message,
-    required rawData,
+    required TransactionStatus status,
+    required String message,
+    required String rawData,
   }) : super(status: status, message: message, rawData: rawData);
 
   factory SetDecimalAmountModeResponse.create(String cb, String data) {
@@ -155,7 +155,7 @@ class SetDecimalAmountModeResponse extends BaseResponse {
 
 /// Response from [resetTerminalRequest] request
 class ResetTerminalResponse extends BaseResponse {
-  ResetTerminalResponse({required status, required message, required rawData})
+  ResetTerminalResponse({required TransactionStatus status, required String message, required String rawData})
       : super(status: status, message: message, rawData: rawData);
 
   factory ResetTerminalResponse.create(String cb, String data) {
@@ -172,9 +172,9 @@ class ResetTerminalResponse extends BaseResponse {
 /// Response from [reprintTransaction] request
 class ReprintTransactionResponse extends BaseResponse {
   ReprintTransactionResponse({
-    required status,
-    required message,
-    required rawData,
+    required TransactionStatus status,
+    required String message,
+    required String rawData,
   }) : super(status: status, message: message, rawData: rawData);
 
   factory ReprintTransactionResponse.create(String cb, String data) {
@@ -194,9 +194,9 @@ class BatchResponse extends BaseResponse {
   final String batchName;
 
   BatchResponse({
-    required status,
-    required message,
-    required rawData,
+    required TransactionStatus status,
+    required String message,
+    required String rawData,
     required this.batchId,
     required this.batchName,
   }) : super(status: status, message: message, rawData: rawData);
@@ -216,7 +216,7 @@ class BatchResponse extends BaseResponse {
 
 /// Response from [sendLogs] request
 class SendLogsResponse extends BaseResponse {
-  SendLogsResponse({required status, required message, required rawData})
+  SendLogsResponse({required TransactionStatus status, required String message, required String rawData})
       : super(status: status, message: message, rawData: rawData);
 
   factory SendLogsResponse.create(String cb, String data) {
@@ -255,9 +255,9 @@ class TransactionResponse extends BaseResponse {
   int? currency;
   String? fiscalisationSigningDetails;
   TransactionResponse({
-    required status,
-    required message,
-    required rawData,
+    required TransactionStatus status,
+    required String message,
+    required String rawData,
     this.clientTransactionId,
     required this.amount,
     required this.tipAmount,
@@ -369,9 +369,9 @@ class FastRefundResponse extends BaseResponse {
   String? aadeTransactionId;
 
   FastRefundResponse({
-    required status,
-    required message,
-    required rawData,
+    required TransactionStatus status,
+    required String message,
+    required String rawData,
     required this.amount,
     this.sourceCode,
     this.cardType,
@@ -401,7 +401,7 @@ class FastRefundResponse extends BaseResponse {
 
 /// Response from [abort] request
 class AbortResponse extends BaseResponse {
-  AbortResponse({required status, required message, required rawData})
+  AbortResponse({required TransactionStatus status, required String message, required String rawData})
       : super(status: status, message: message, rawData: rawData);
 
   factory AbortResponse.create(String cb, String data) {
