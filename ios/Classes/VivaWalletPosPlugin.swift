@@ -1,7 +1,7 @@
 import Flutter
 import UIKit
 
-public class VivaWalletPosPlugin: NSObject, FlutterPlugin, UIApplicationDelegate {
+public class VivaWalletPosPlugin: NSObject, FlutterPlugin, UIApplicationDelegate, FlutterSceneLifeCycleDelegate {
 
   private static let methodChannelName = "viva_wallet_pos/methods"
   private static let vwpClientBase = "vivapayclient://pay/v1"
@@ -13,28 +13,28 @@ public class VivaWalletPosPlugin: NSObject, FlutterPlugin, UIApplicationDelegate
 
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(
-      name: methodChannelName,
-      binaryMessenger: registrar.messenger()
+        name: methodChannelName,
+        binaryMessenger: registrar.messenger()
     )
 
     let instance = VivaWalletPosPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
-
     registrar.addApplicationDelegate(instance)
+    registrar.addSceneDelegate(instance)
 
     let appId = Bundle.main.bundleIdentifier ?? "unknown.bundle"
 
     callbackSchemeOnly = "\(appId).cb"
     callbackSchemeFull = "\(callbackSchemeOnly)://result"
 
-    print("🔥 iOS VivaWalletPosPlugin registered")
-    print("🔥 Bundle id: \(appId)")
-    print("🔥 Expected callback scheme only: \(callbackSchemeOnly)")
-    print("🔥 Expected callback full: \(callbackSchemeFull)")
-  }
+    print("✅ iOS VivaWalletPosPlugin registered")
+    print("➡️ Bundle id: \(appId)")
+    print("🆗 Expected callback scheme only: \(callbackSchemeOnly)")
+    print("🆗 Expected callback full: \(callbackSchemeFull)")
+}
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    print("🔥 iOS plugin received method: \(call.method)")
+    print("✅ iOS plugin received method: \(call.method)")
 
     if VivaWalletPosPlugin.pendingResult != nil {
       result(FlutterError(
@@ -125,7 +125,6 @@ public class VivaWalletPosPlugin: NSObject, FlutterPlugin, UIApplicationDelegate
       for (key, value) in args {
         if value is NSNull { continue }
 
-        // keep bools stable (Flutter sometimes sends NSNumber)
         let strValue: String = normalizeToString(value)
 
         if key == "fiscalisationData" {
@@ -169,7 +168,7 @@ public class VivaWalletPosPlugin: NSObject, FlutterPlugin, UIApplicationDelegate
       if CFGetTypeID(n) == CFBooleanGetTypeID() {
         return n.boolValue ? "true" : "false"
       }
-
+    
       return n.stringValue
     }
 
@@ -218,9 +217,24 @@ public class VivaWalletPosPlugin: NSObject, FlutterPlugin, UIApplicationDelegate
     }
   }
 
-  public func application(_ app: UIApplication,
-                          open url: URL,
-                          options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+// Old AppDelegate lifecycle support
+  public func application(
+    _ app: UIApplication,
+    open url: URL,
+    options: [UIApplication.OpenURLOptionsKey: Any] = [:]
+  ) -> Bool {
+    return VivaWalletPosPlugin.handleCallback(url)
+  }
+
+  // New UIScene lifecycle support
+  public func scene(
+    _ scene: UIScene,
+    openURLContexts URLContexts: Set<UIOpenURLContext>
+  ) -> Bool {
+    guard let url = URLContexts.first?.url else {
+      return false
+    }
+
     return VivaWalletPosPlugin.handleCallback(url)
   }
 
