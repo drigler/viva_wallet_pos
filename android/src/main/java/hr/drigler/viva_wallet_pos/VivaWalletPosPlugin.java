@@ -355,6 +355,7 @@ public class VivaWalletPosPlugin implements FlutterPlugin, MethodCallHandler, Ac
         + addArgument(call, "ISV_sourceCode")
         + addArgument(call, "ISV_customerTrns")
         + addArgument(call, "ISV_clientTransactionId")
+        + addArgument(call, "paymentMethod")
         + addArgument(call, "aadeProviderId")
         + addArgument(call, "aadeProviderSignatureData")
         + addArgument(call, "aadeProviderSignature")

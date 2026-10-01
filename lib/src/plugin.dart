@@ -258,8 +258,9 @@ class VivaWalletPos {
       'merchantKey': merchantKey ?? 'deprecated',
       'clientTransactionId': clientTransactionId,
       'amount': ParamUtils.doubleToAmount(amount),
-      'tipAmount':
-          tipAmount != null ? ParamUtils.doubleToAmount(tipAmount) : null,
+      'tipAmount': tipAmount != null
+          ? ParamUtils.doubleToAmount(tipAmount)
+          : null,
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
       'show_rating': showRating,
@@ -340,14 +341,16 @@ class VivaWalletPos {
     int? isvSourceCode,
     String? isvCustomerTrns,
     String? isvClientTransactionId,
+    String? paymentMethod,
     bool showReceipt = true,
     bool showTransactionResult = true,
   }) async {
     final Map<String, dynamic> params = <String, dynamic>{
       'clientTransactionId': clientTransactionId,
       'amount': ParamUtils.doubleToAmount(amount),
-      'tipAmount':
-          tipAmount != null ? ParamUtils.doubleToAmount(tipAmount) : null,
+      'tipAmount': tipAmount != null
+          ? ParamUtils.doubleToAmount(tipAmount)
+          : null,
       'ISV_clientId': isvClientId,
       'ISV_clientSecret': isvClientSecret,
       'ISV_amount': isvAmount,
@@ -355,6 +358,7 @@ class VivaWalletPos {
       'ISV_sourceCode': isvSourceCode,
       'ISV_customerTrns': isvCustomerTrns,
       'ISV_clientTransactionId': isvClientTransactionId,
+      'paymentMethod': paymentMethod,
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
       'aadeProviderId': aadeProviderId,
@@ -384,8 +388,9 @@ class VivaWalletPos {
       'merchantKey': merchantKey ?? 'deprecated',
       'clientTransactionId': clientTransactionId,
       'amount': ParamUtils.doubleToAmount(amount),
-      'tipAmount':
-          tipAmount != null ? ParamUtils.doubleToAmount(tipAmount) : null,
+      'tipAmount': tipAmount != null
+          ? ParamUtils.doubleToAmount(tipAmount)
+          : null,
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,
       'show_rating': showRating,
@@ -425,8 +430,9 @@ class VivaWalletPos {
       'amount': ParamUtils.doubleToAmount(amount),
       'orderCode': orderCode,
       'shortOrderCode': shortOrderCode,
-      'txnDateFrom':
-          txnDateFrom != null ? '${txnDateFrom.toIso8601String()}Z' : null,
+      'txnDateFrom': txnDateFrom != null
+          ? '${txnDateFrom.toIso8601String()}Z'
+          : null,
       'txnDateTo': txnDateTo != null ? '${txnDateTo.toIso8601String()}Z' : null,
       'show_receipt': showReceipt,
       'show_transaction_result': showTransactionResult,

@@ -253,6 +253,7 @@ class TransactionResponse extends BaseResponse {
   String? isvClientSecret;
   String? isvMerchantId;
   int? currency;
+  String? aadeTransactionId;
   String? fiscalisationSigningDetails;
   TransactionResponse({
     required TransactionStatus status,
@@ -278,6 +279,7 @@ class TransactionResponse extends BaseResponse {
     this.isvClientSecret,
     this.isvMerchantId,
     this.currency,
+    this.aadeTransactionId,
     this.fiscalisationSigningDetails,
   }) : super(status: status, message: message, rawData: rawData);
 
@@ -325,37 +327,39 @@ class TransactionResponse extends BaseResponse {
       isvClientSecret: uri.queryParameters['ISV_clientSecret'],
       isvMerchantId: uri.queryParameters['ISV_merchantId'],
       currency: int.tryParse(uri.queryParameters['currency'] ?? ''),
+      aadeTransactionId: uri.queryParameters['aadeTransactionId'] ?? '',
       fiscalisationSigningDetails:
           extractParam('fiscalisationSigningDetails') ?? '',
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'status': status.name,
-        'message': message,
-        'rawData': rawData,
-        'clientTransactionId': clientTransactionId,
-        'amount': amount,
-        'tipAmount': tipAmount,
-        'verificationMethod': verificationMethod,
-        'rrn': rrn,
-        'cardType': cardType,
-        'referenceNumber': referenceNumber,
-        'accountNumber': accountNumber,
-        'authorisationCode': authorisationCode,
-        'tid': tid,
-        'aid': aid,
-        'orderCode': orderCode,
-        'shortOrderCode': shortOrderCode,
-        'transactionDate': transactionDate?.toIso8601String(),
-        'transactionId': transactionId,
-        'isvAmount': isvAmount,
-        'isvClientId': isvClientId,
-        'isvClientSecret': isvClientSecret,
-        'isvMerchantId': isvMerchantId,
-        'currency': currency,
-        'fiscalisationSigningDetails': fiscalisationSigningDetails,
-      };
+    'status': status.name,
+    'message': message,
+    'rawData': rawData,
+    'clientTransactionId': clientTransactionId,
+    'amount': amount,
+    'tipAmount': tipAmount,
+    'verificationMethod': verificationMethod,
+    'rrn': rrn,
+    'cardType': cardType,
+    'referenceNumber': referenceNumber,
+    'accountNumber': accountNumber,
+    'authorisationCode': authorisationCode,
+    'tid': tid,
+    'aid': aid,
+    'orderCode': orderCode,
+    'shortOrderCode': shortOrderCode,
+    'transactionDate': transactionDate?.toIso8601String(),
+    'transactionId': transactionId,
+    'isvAmount': isvAmount,
+    'isvClientId': isvClientId,
+    'isvClientSecret': isvClientSecret,
+    'isvMerchantId': isvMerchantId,
+    'currency': currency,
+    'aadeTransactionId': aadeTransactionId,
+    'fiscalisationSigningDetails': fiscalisationSigningDetails,
+  };
 }
 
 /// Fast Refund response  from [fastRefund] request
