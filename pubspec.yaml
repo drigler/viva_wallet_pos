@@ -1,6 +1,6 @@
 name: viva_wallet_pos
 description: This is a flutter plugin for Android and iOS integration with Viva Wallet POS Terminal.
-version: 0.2.4
+version: 0.2.5
 homepage: https://github.com/drigler/viva_wallet_pos
 
 
@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  plugin_platform_interface: ^2.0.3
+  plugin_platform_interface: ^2.0.2
 
 dev_dependencies:
   flutter_test:
