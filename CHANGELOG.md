@@ -1,3 +1,6 @@
+## 0.2.5 - 2026-10-01
+- Nev features
+
 ## 0.2.4 - 2026-07-17
 - BREAKING: Raised the minimum supported versions to Dart 3.10 and Flutter 3.38.
 
