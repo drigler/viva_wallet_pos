@@ -1,3 +1,9 @@
+## 0.2.4 - 2026-07-17
+- BREAKING: Raised the minimum supported versions to Dart 3.10 and Flutter 3.38.
+
+## 0.2.3 - 2026-05-26
+- Added aade parameters to cancel function [@fotis-psarris](https://github.com/drigler/viva_wallet_pos/pull/16)
+ 
 ## 0.2.2 - 2026-05-26
 - Corrected build.graddle
 - Corrected typo in parameter clientTransactionId
